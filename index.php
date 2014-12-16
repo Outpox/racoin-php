@@ -8,9 +8,16 @@ $app = new \Slim\Slim(array(
 $loader = new Twig_Loader_Filesystem('template');
 $twig = new Twig_Environment($loader);
 
-$app->get('/', function () use ($twig) {
-    $template = $twig->loadTemplate("main.html.twig");
-    echo $template->render(array());
+$menu = array(
+    array('href' => "./index.php",
+        'text' => 'Acceuil'),
+    array('href' => './#',
+        'text' => 'Ville')
+);
+
+$app->get('/', function () use ($twig, $menu) {
+    $template = $twig->loadTemplate("index.html.twig");
+    echo $template->render(array("breadcrumb" => $menu));
 });
 
 $app->run();
