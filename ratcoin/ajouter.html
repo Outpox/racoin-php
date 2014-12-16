@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/master.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/component.css" />
+    <title>Passer une annonce</title>
+</head>
+<body class="cbp-spmenu-push">
+<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+    <h3>Catégories</h3>
+    <a href="#">Véhicules</a>
+    <a href="#">Immobilier</a>
+    <a href="#">Multimédia</a>
+    <a href="#">Matériel pro</a>
+    <a href="#">Loisirs</a>
+    <a href="#">Maisons</a>
+    <h3>Compte</h3>
+    <a href="#">Mon compte pro</a>
+</nav>
+
+<div class="wrapper">
+    <div class="row">
+        <div class="columns sm-show">
+            <img id="showLeftPush" class="svg-mobile" src="img/menu.svg" alt=""/>
+        </div>
+        <div class="columns align-center header">
+            <a href="ratcoin.html"><img id="rc-img" class="align-center" src="img/ratcoin2.png" alt=""/></a>
+            <h1 id="rc-title">Rat Coin</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns align-center">
+            <ul id="list-action">
+                <li><a href="recherche.html">Effectuer une recherche</a></li>
+                <li><a href="ajouter.html">Déposer une annonce</a></li>
+                <li><a href="#">Gérer mes annonces</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row sm-hide-only">
+        <div class="columns align-center">
+            <div class="categ-title">
+                <h4>Catégories</h4>
+            </div>
+            <ul class="inline-list" id="list-categ">
+                <li><a href="#">Véhicules</a></li>
+                <li><a href="#">Immobilier</a></li>
+                <li><a href="#">Multimédia</a></li>
+                <li><a href="#">Matériel pro</a></li>
+                <li><a href="#">Loisirs</a></li>
+                <li><a href="#">Maison</a></li>
+            </ul>
+            <hr class="hr-ratcoin"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            <br/>
+            <ul class="breadcrumb">
+                <li><a href="ratcoin.html">Accueil</a></li>
+                <li class="current"><a href="#">Déposer une annonce</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns md-8 md-center">
+            <div class="add-item">
+                <form method="post" action="">
+
+                    <fieldset id="coordonnee">
+                        <legend>Vos coordonnées</legend>
+
+                        <input type="text" name="nom" id="nom" placeholder="Nom"/>
+                        <input type="email" name="email" id="email" placeholder="Email"/>
+                        <input type="text" name="phone" id="phone" placeholder="Téléphone"/>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Votre annonce</legend>
+                        <select name="categorie">
+                            <option>Choississez une catégorie</option>
+                            <option>-----</option>
+                            <option>Véhicule</option>
+                            <option>Immobilier</option>
+                            <option>Multimédia</option>
+                            <option>Matériel pro</option>
+                            <option>Loisirs</option>
+                            <option>Maison</option>
+                        </select>
+
+                        <input type="text" name="title" id="title" placeholder="Titre de l'annonce"/>
+                        <textarea name="description" id="description" cols="40" rows="4" placeholder="Votre description…"></textarea>
+                        <input type="text" name="price" id="price" placeholder="Prix" />
+
+                         <div class="radio">
+                             <p>Vous êtes un :<br/>
+                                 <label><input type="radio" name="name" value="1" id="particulier" />Particulier</label> <br/>
+                                 <label><input type="radio" name="name" value="2" id="professionnel" />Professionnel</label>
+                             </p>
+                         </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Sécurisez votre annonce</legend>
+
+                        <input type="password" name="nom" id="psw" placeholder="Mot de passe"/>
+                        <input type="password" name="email" id="psw-repeat" placeholder="Confirmez le mot de passe"/>
+
+                    </fieldset>
+                    <div class="align-center" id="validate">
+                        <input type="submit" id="toggler" value="Déposer mon annonce" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="columns footer align-center">
+    <p>Le Rat Coin ™ - 2014</p>
+</div>
+<script src="js/classie.js"></script>
+<script>
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+            showLeftPush = document.getElementById( 'showLeftPush' ),
+            body = document.body;
+
+    showLeftPush.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( body, 'cbp-spmenu-push-toright' );
+        classie.toggle( menuLeft, 'cbp-spmenu-open' );
+        disableOther( 'showLeftPush' );
+    };
+</script>
+</body>
+</html>

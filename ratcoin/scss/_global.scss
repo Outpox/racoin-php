@@ -1,0 +1,446 @@
+* {
+  @include box-sizing(border-box);
+  &:focus{
+    outline: 0;
+  }
+}
+
+
+.header{
+  position: relative;
+  a{
+    display: inline-block;
+    vertical-align: top;
+    &.account{
+      position: absolute;
+      right: 1rem;
+      color: #000000;
+      &:hover{
+        color: gold;
+        border-bottom: 1px dotted gray;
+      }
+    }
+  }
+  #rc-title, #rc-img{
+    display: block;
+  }
+  img#rc-img{
+    width: 60px;
+    height: 60px;
+    margin: auto;
+  }
+}
+
+img.svg-mobile{
+  width: 1.25em;
+  &:hover{
+    cursor: pointer;
+    color: red;
+  }
+}
+
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 960px;
+  padding: 0.5rem;
+  .categ-title{
+    margin: 1rem 0;
+    h4{
+      font-weight: bold;
+    }
+  }
+}
+
+// Footer
+.footer{
+  height: 2rem;
+  line-height: 2rem;
+  color: #ffffff;
+  background-color: #000000;
+  bottom: 0;
+  p{
+    font-size: 0.750rem;
+    margin: 0;
+    color: gold;
+  }
+}
+
+
+
+ul#list-action{
+  display: block;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  li{
+    list-style: none;
+  }
+  a{
+    padding: 0.38889rem 0.77778rem;
+    display: inherit;
+    color: #414141;
+    &:hover{
+      background-color: black;
+      color: gold;
+    }
+  }
+}
+
+ul#list-categ{
+  background-color: whitesmoke;
+  padding: 0.5rem;
+  li{
+    display: inline;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    &:after{
+      content: " | ";
+    }
+    &:last-child:after{
+      content: "";
+    }
+    a{
+      text-decoration: none;
+      color: #414141;
+      padding: 5px;
+      @include border-radius(3px);
+      &:hover{
+        color: gold;
+        background-color: black;
+      }
+    }
+  }
+}
+
+.hr-ratcoin{
+  max-width: 50%;
+}
+
+article.item{
+  margin-bottom: 15px;
+  border: 1px solid #e8e8e8;
+  padding: 0 0.500rem 0.4rem;
+  @include border-radius(3px);
+  a{
+    display: block;
+    text-decoration: none;
+    color: #333333;
+    p em{
+      font-size: .750rem;
+    }
+    h5{
+      color: #1254a3;
+      font-weight: bold;
+      margin-bottom: 0.313rem;
+    }
+    .item-img, .item-infos{
+      display: inline-block;
+      vertical-align: top;
+    }
+    .item-img{
+      @media only screen and (min-width: $tablet){
+        width: 100%;
+        text-align: center;
+      }
+      img{
+        margin: auto;
+        width: 125px;
+        height: 125px;
+      }
+      p{
+        margin: 0;
+        font-style: italic;
+      }
+    }
+    .item-infos{
+      width: 52%;
+      @media only screen and (min-width: $tablet) {
+        width: 100%;
+      }
+      padding-left: 5px;
+      p{
+        margin:0;
+        font-size: 0.875rem;
+        span.price{
+          color: darkred;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  &:hover{
+    background-color: whitesmoke;
+  }
+}
+
+// item description
+%p{
+  display: block;
+  @extend .uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 0;
+}
+
+.wrapper-item{
+  margin-top: 1.5rem;
+  max-width: 960px;
+  @media only screen and (min-width: $tablet){
+    .item-container, .table-contact{
+      //display: inline-block;
+      float: left;
+      vertical-align: top;
+    }
+  }
+  .title-item{
+    padding: 1rem;
+  }
+  .ilovetowrap{
+    @include pie-clearfix; //rajoute
+    width: 100%;
+    height: 100%;
+    clear: both;
+    .item-container{
+      @media only screen and (min-width: $tablet){
+        width: 60%;
+      }
+      border: 1px solid #e8e8e8;
+      .img-container img{
+        width: 460px;
+        height: 345px;
+      }
+      .item-min{
+        a.current img{
+          border: 1px solid black;
+        }
+        img{
+          width: 45px;
+          height: 45px;
+          border: 1px solid lightgray;
+          &:hover{
+            opacity: 0.5;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .table-contact{
+      @include pie-clearfix;
+      width: 100%;
+      @media only screen and (min-width: $tablet){
+        margin: 0 auto auto 1rem;
+        width: 35%;
+      }
+      .hg-table-container, .contact{
+        display: inline-block;
+        vertical-align: top;
+        @media only screen and (min-width: $tablet){
+          display: block;
+          width: auto !important;
+          margin: 0;
+        }
+      }
+      .hg-table-container{
+        width: 58%;
+        margin-right: 2%;
+        table.hg-table tbody tr td:first-child{
+          font-weight: bold;
+        }
+        td.price{
+          color: darkred;
+          font-weight: bold;
+        }
+      }
+      .contact{
+        height: 100%;
+        width: 37%;
+        .tocontact{
+          margin-top: 10px;
+          background-color: orangered;
+          @include border-radius(3px);
+          p{
+            @extend %p;
+          }
+        }
+        a{
+          display: block;
+          margin-top: 8px;
+          img{
+            width: 64px;
+            height: 40px;
+            &:hover{
+              background-color: orangered;
+            }
+          }
+        }
+      }
+      .modify{
+        .tomodify{
+          background-color: orangered;
+          @include border-radius(3px);
+          p{
+            @extend %p;
+          }
+        }
+        a{
+          display: inline-block;
+          padding: 0 20px;
+          margin-top: 8px;
+          img:hover{
+            background-color: orangered;
+          }
+        }
+      }
+    }
+  }
+}
+
+.description{
+  @extend .justify;
+  @media only screen and (min-width: $tablet) {
+    margin-top: 2rem !important;
+  }
+  h3{
+    font-weight: bold;
+  }
+  table.carac tbody{
+    tr td:first-child{
+      color: #262626;
+      font-weight: bold;
+    }
+    tr td:nth-child(2n){
+      color: black;
+    }
+  }
+}
+
+.manage{
+  background-color: orangered;
+  height: 2rem;
+  line-height: 2rem;
+  a{
+    color: #ffffff;
+    @extend .uppercase;
+    font-weight: bold;
+    &:hover{
+      color: orangered;
+    }
+  }
+  &:hover{
+    background-color: black;
+  }
+}
+
+// recherche
+div.formulaire{
+  margin-top:1rem;
+  @media only screen and (min-width: $tablet){
+    max-width: 768px;
+    margin: auto;
+  }
+  form{
+    margin:0 auto;
+    input, select{
+      width: 100%;
+      margin: 0.50rem auto;
+      padding:6px 15px 6px 30px;
+    }
+    input.search {
+      background: url('../img/search.png') no-repeat 8px;
+    }
+    input[type=text]{
+      color: orangered;
+      @include border-radius(15px);
+      border: 1px solid #a3a3a3;
+      //@include box-shadow(rgba(0, 0, 0, 0.5) 0px 2px 2px 0px, rgba(28, 28, 28, 0.50) 0px 2px 2px 0px inset);
+      &:focus{
+        border: 1px solid orangered;
+      }
+      input[type=button], input[type=button]:hover {
+        position:relative;
+        border:1px solid #adc5cf;
+        background-color: #e4f1f9;
+        color: black;
+        cursor: pointer;
+      }
+    }
+  }
+  #validate{
+    margin-top: 20px;
+  }
+  input[type=submit]{
+    width: 100%;
+    padding: 0.4rem 0.7rem;
+    @include border-radius(15px);
+    border: 1px solid orangered;
+    background: none;
+    text-decoration: none;
+    &:hover{
+      color: #ffffff;
+      background-color: orangered;
+    }
+    @media only screen and (min-width: $tablet){
+      width: 30%;
+    }
+  }
+  .form-item{
+    margin: auto;
+    @extend .align-center;
+  }
+}
+
+// Depot annonce
+div.add-item {
+  margin-top: 1rem;
+  @media only screen and (min-width: $tablet) {
+    max-width: 768px;
+    margin: auto;
+  }
+  form {
+    margin: 0 auto;
+    fieldset#coordonnee{
+      input{
+        display: block;
+      }
+    }
+    input, select, textarea {
+      width: 100%;
+      margin: 0.50rem auto;
+      padding:6px 15px 6px 30px;
+    }
+    input[type=text], input[type=email], input[type=password], textarea{
+      color: orangered;
+      @include border-radius(15px);
+      border: 1px solid #a3a3a3;
+      &:focus{
+        border: 1px solid orangered;
+      }
+      input[type=button], input[type=button]:hover {
+        position:relative;
+        border:1px solid #adc5cf;
+        background-color: #e4f1f9;
+        color: black;
+        cursor: pointer;
+      }
+    }
+    input[type=radio], label{
+      display: inline;
+      width: 30px;
+    }
+    textarea{
+    }
+    input[type=submit]{
+      width: 100%;
+      padding: 0.4rem 0.7rem;
+      @include border-radius(15px);
+      border: 1px solid orangered;
+      background: none;
+      text-decoration: none;
+      &:hover{
+        color: #ffffff;
+        background-color: orangered;
+      }
+    }
+  }
+}

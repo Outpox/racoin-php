@@ -1,0 +1,147 @@
+// grid variables
+$wrapper-max-width: 960px !default;
+$grid-columns: 12 !default;
+$gutter: 1% !default;
+$tablet: 40.063em !default; // 641px
+$desktop: 64.063em !default; // 1025px
+
+// Function qui retourne le chiffre magique :)
+@function calculate-grid($total-grid-columns, $gutter-size){
+  @return ((100% - ($total-grid-columns - 1) * $gutter-size) / $total-grid-columns);
+}
+
+
+
+/*=======================*/
+/* @Mixins
+/*======================*/
+
+// Grille du style: $suffix-#i
+
+@mixin responsive-columns($suffix: ''){
+  @for $i from 0 through $grid-columns{
+    @if $i != 0 {
+      .#{$suffix}-#{$i}{
+        width: 100% - (($grid-columns - $i) * (calculate-grid($grid-columns, $gutter) + $gutter));
+        //flex-basis: pour plus tard.
+        margin-right: $gutter;
+        word-wrap: break-word;
+        &:last-child{
+          margin-right:0;
+        }
+      }
+    }
+    .#{$suffix}-push-#{$i}{ left:$i / $grid-columns * 100%; }
+    .#{$suffix}-offset-#{$i}{ margin-left:$i / $grid-columns * 100%; }
+    .#{$suffix}-pull-#{$i}{ left:$i / $grid-columns * 100%; }
+  }
+}
+
+// Grille du style: $suffix-#i-#j
+
+@mixin fraction-columns($suffix: ''){
+
+  @for $i from 1 through ($grid-columns - 1){
+    @for $j from 1 through ($grid-columns){
+      //$k: $i + 1;
+      .#{$suffix}-#{$i}-#{$j}{
+        width: 100% / $j * $i;
+      }
+    }
+  }
+}
+
+/*==================*/
+/* %Extends
+/*================*/
+%col{
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding:0;
+}
+
+/*==============*/
+/* Container
+/*=============*/
+.wrapper {
+  max-width: $wrapper-max-width;
+  margin: 0 auto;
+  .row{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    clear: both;
+    @include clearfix;
+  }
+}
+
+
+/*=========*/
+/* Grid
+/*========*/
+
+
+@for $i from 1 through $grid-columns{
+  .sm-#{$i}, .md-#{$i}, .lg-#{$i} { @extend %col; }
+}
+
+@for $i from 1 through ($grid-columns - 1){
+  @for $j from 1 through ($grid-columns){
+    .sm-#{$i}-#{$j}, .md-#{$i}-#{$j}, .lg-#{$i}-#{$j} { @extend %col; }
+  }
+}
+
+
+/*================*/
+/* Media queries
+/*===============*/
+
+/*----------/
+/* Mobile */
+
+@include responsive-columns('sm');
+@include fraction-columns('sm');
+.columns {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+.sm-center{ margin: 0 auto !important; float: none !important; }
+
+.sm-show{ display: block !important;}
+.sm-hide-only{ display: none !important;}
+.md-show{ display: none !important; }
+.lg-show{ display: none !important; }
+
+/*-----------------/
+/* Medium Screen */
+
+@media only screen and (min-width: $tablet) {
+  @include responsive-columns('md');
+  @include fraction-columns('md');
+
+  .sm-hide-only{ display: block !important;}
+
+  .md-center{ margin: 0 auto !important; float: none !important; }
+  .md-hide{ display: none !important; }
+  .md-show{ display: block !important; }
+
+
+  .sm-show{ display: none !important; }
+}
+
+/*----------------/
+/* Large Screen */
+
+@media only screen and (min-width: $desktop) {
+  @include responsive-columns('lg');
+  @include fraction-columns('lg');
+
+  .lg-center{ margin: 0 auto !important; float: none !important; }
+
+  .sm-hide-only{ display: block;}
+  .md-show{ display: none !important; }
+  .lg-hide{ display: none !important; }
+  .lg-show{ display: block !important; }
+}

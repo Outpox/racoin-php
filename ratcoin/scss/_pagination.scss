@@ -1,0 +1,55 @@
+$pagination-a-color: #0e0b04;
+$pagination-a-hover: rgba(55, 163, 193, 0.6);
+$pagination-current-background: #1EC9C6;
+$pagination-current-color: white;
+$pagination-disable-color: gray;
+$pagination-arrow-color: #f8fffd;
+$pagination-font-size: 0.813rem;
+$pagination-border-radius: 3px;
+
+ul.pagination{
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+  min-height: 2rem;
+
+  li{
+    float: left;
+    display: block;
+    height: 1.5rem;
+    font-size: $pagination-font-size;
+    a{
+      display: block;
+      float: left;
+      padding: 0.088rem 0.713rem;
+      @include border-radius($pagination-border-radius);
+      text-align: center;
+      color: $pagination-a-color;
+      &:hover{
+        background-color: lighten($pagination-current-background, 40%);
+        @include border-radius(3px);
+        transition: background-color 300ms ease-out;
+      }
+    }
+    &.disable{
+      a{
+        color: $pagination-disable-color;
+        &:hover{
+          background: none;
+          cursor: default;
+        }
+      }
+    }
+    &.current{
+      a{
+        color: $pagination-current-color;
+        font-weight: bold;
+        background-color: $pagination-current-background;
+        cursor: default;
+      }
+    }
+    &.arrow a:hover{
+      color: $pagination-arrow-color;
+    }
+  }
+}

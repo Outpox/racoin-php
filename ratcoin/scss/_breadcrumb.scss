@@ -1,0 +1,48 @@
+$crumb-link-color: #3385e8;
+
+$crumb-border: false;
+$crumb-border-style: 1px solid #dbdbdb;
+$crumb-border-radius: 3px;
+$crumb-background-color: none;
+
+
+
+ul.breadcrumb{
+  display: block;
+  padding: 0.1rem 0.6rem 0.3rem;
+  overflow: hidden;
+  margin-left: 0;
+  list-style: none;
+  background-color: $crumb-background-color;
+  @if $crumb-border{
+    border: $crumb-border-style;
+    border-radius: $crumb-border-radius;
+  }
+  li{
+    display: inline-block;
+    font-size: 0.813rem;
+    &:nth-child(n+2):before {
+      content: ">";
+      display: inline-block;
+      margin: 0 8px;
+
+    }
+    a{
+      color: $crumb-link-color;
+      &:hover{
+        color: darken($crumb-link-color, 20%);
+      }
+    }
+  }
+  > li{
+    &.current a{
+      color: #232323;
+    }
+    &.disable a{
+      color: #c6c6c6;
+      &:hover{
+        cursor: default;
+      }
+    }
+  }
+}
