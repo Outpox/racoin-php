@@ -15,14 +15,26 @@ $menu = array(
         'text' => 'Ville')
 );
 
-$app->get('/', function () use ($twig, $menu) {
+$chemin = dirname($_SERVER[SCRIPT_NAME]);
+
+$app->get('/', function () use ($twig, $menu, $chemin) {
     $template = $twig->loadTemplate("index.html.twig");
-    echo $template->render(array("breadcrumb" => $menu));
+    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
 
-$app->get('/item/', function () use ($twig, $menu) {
+$app->get('/item/', function () use ($twig, $menu, $chemin) {
     $template = $twig->loadTemplate("item.html.twig");
-    echo $template->render(array("breadcrumb" => $menu));
+    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+});
+
+$app->get('/add/', function () use ($twig, $menu, $chemin) {
+    $template = $twig->loadTemplate("add.html.twig");
+    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+});
+
+$app->get('/search/', function () use ($twig, $menu, $chemin) {
+    $template = $twig->loadTemplate("search.html.twig");
+    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
 
 $app->run();
