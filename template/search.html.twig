@@ -1,0 +1,67 @@
+{% extends "main.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="columns">
+            <div class="formulaire">
+                <form>
+                    <div class="form-item"><input type="text" class="search" placeholder="Mots clés..."></div>
+                    <div class="form-item">
+                        <select name="categorie">
+                            <option>Toutes catégories</option>
+                            <option>-----</option>
+                            <option>Véhicule</option>
+                            <option>Immobilier</option>
+                            <option>Multimédia</option>
+                            <option>Matériel pro</option>
+                            <option>Loisirs</option>
+                            <option>Maison</option>
+                        </select>
+                    </div>
+                    <div class="form-item"><input type="text" placeholder="Ville, Code postal..."></div>
+                    <div class="form-item">
+                        <select name="prix-min">
+                            <option>Min</option>
+                            <option value="0">0</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                            <option value="400">400</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="700">700</option>
+                            <option value="800">800</option>
+                            <option value="900">900</option>
+                            <option value="1000">1000</option>
+                            <option value="1500">1500</option>
+                            <option value="2000">2000</option>
+                        </select>
+                        <select name="prix-min">
+                            <option>Max</option>
+                            <option value="0">0</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                            <option value="400">400</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="700">700</option>
+                            <option value="800">800</option>
+                            <option value="900">900</option>
+                            <option value="1000">1000</option>
+                            <option value="1500">1500</option>
+                            <option value="2000">2000</option>
+                            <option value="nolimit">illimité</option>
+                        </select>
+
+                        <div class="form-item" id="validate">
+                            <input type="submit" id="toggler" value="Lancer la recherche"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
