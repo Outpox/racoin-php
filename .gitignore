@@ -106,4 +106,5 @@ vendor/
 .directory
 
 ### Database ###
+config/config.ini
 config/db.ini
