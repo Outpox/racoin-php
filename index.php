@@ -20,4 +20,9 @@ $app->get('/', function () use ($twig, $menu) {
     echo $template->render(array("breadcrumb" => $menu));
 });
 
+$app->get('/item/', function () use ($twig, $menu) {
+    $template = $twig->loadTemplate("item.html.twig");
+    echo $template->render(array("breadcrumb" => $menu));
+});
+
 $app->run();
