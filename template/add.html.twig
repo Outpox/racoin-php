@@ -1,0 +1,58 @@
+{% extends "main.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="columns md-8 md-center">
+            <div class="add-item">
+                <form method="post" action="">
+
+                    <fieldset id="coordonnee">
+                        <legend>Vos coordonnées</legend>
+
+                        <input type="text" name="nom" id="nom" placeholder="Nom"/>
+                        <input type="email" name="email" id="email" placeholder="Email"/>
+                        <input type="text" name="phone" id="phone" placeholder="Téléphone"/>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Votre annonce</legend>
+                        <select name="categorie">
+                            <option>Choississez une catégorie</option>
+                            <option>-----</option>
+                            <option>Véhicule</option>
+                            <option>Immobilier</option>
+                            <option>Multimédia</option>
+                            <option>Matériel pro</option>
+                            <option>Loisirs</option>
+                            <option>Maison</option>
+                        </select>
+
+                        <input type="text" name="title" id="title" placeholder="Titre de l'annonce"/>
+                        <textarea name="description" id="description" cols="40" rows="4"
+                                  placeholder="Votre description…"></textarea>
+                        <input type="text" name="price" id="price" placeholder="Prix"/>
+
+                        <div class="radio">
+                            <p>Vous êtes un :<br/>
+                                <label><input type="radio" name="name" value="1" id="particulier"/>Particulier</label>
+                                <br/>
+                                <label><input type="radio" name="name" value="2"
+                                              id="professionnel"/>Professionnel</label>
+                            </p>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Sécurisez votre annonce</legend>
+
+                        <input type="password" name="nom" id="psw" placeholder="Mot de passe"/>
+                        <input type="password" name="email" id="psw-repeat" placeholder="Confirmez le mot de passe"/>
+
+                    </fieldset>
+                    <div class="align-center" id="validate">
+                        <input type="submit" id="toggler" value="Déposer mon annonce"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}
