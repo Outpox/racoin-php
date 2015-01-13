@@ -1,5 +1,7 @@
 <?php
 
+namespace controller;
+
 class search {
 
     function show($twig, $menu, $chemin) {
