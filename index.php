@@ -27,6 +27,9 @@ $app->get('/item/:n', function () use ($twig, $menu, $chemin) {
 });
 
 $app->get('/add/', function () use ($twig, $menu, $chemin) {
+    $ajout = new controller\addAnnonce();
+    $ajout->addItem();
+
     $template = $twig->loadTemplate("add.html.twig");
     echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
