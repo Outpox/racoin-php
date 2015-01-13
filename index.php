@@ -36,8 +36,12 @@ $app->get('/add/', function () use ($twig, $menu, $chemin) {
 });
 
 $app->get('/search/', function () use ($twig, $menu, $chemin) {
-    $template = $twig->loadTemplate("search.html.twig");
-    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+    $s = new controller\search();
+    $s->show($twig, $menu, $chemin);
+});
+
+$app->post('/search/', function () use ($twig, $menu, $chemin) {
+
 });
 
 $app->run();
