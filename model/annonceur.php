@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace model;
 
 class annonceur extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'annonceur';
