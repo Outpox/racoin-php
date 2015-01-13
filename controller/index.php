@@ -10,6 +10,6 @@ class index {
     protected $annonce;
 
     public function getAll() {
-        
+        $this->annonce = "l";
     }
 }
