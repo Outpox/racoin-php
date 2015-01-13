@@ -22,8 +22,10 @@ $app->get('/', function () use ($twig, $menu, $chemin) {
     echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
 
-$app->get('/item/:n', function () use ($twig, $menu, $chemin) {
 
+$app->get('/item/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item= new \controller\item();
+    $item->afficherItem($twig,$menu,$chemin,$n);
 });
 
 $app->get('/add/', function () use ($twig, $menu, $chemin) {
