@@ -16,7 +16,7 @@ class addItem{
     function addNewItem($twig, $menu, $chemin, $allPostVars){
 
         $annonce = new Annonce();
-        $annonce
+
         $template = $twig->loadTemplate("add.html.twig");
         echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 
