@@ -26,9 +26,19 @@ $app->get('/item/:n', function () use ($twig, $menu, $chemin) {
 
 });
 
-$app->get('/add/', function () use ($twig, $menu, $chemin) {
-    $ajout = new controller\addAnnonce();
-    $ajout->addItem();
+$app->get('/add/', function () use ($twig, $app, $menu, $chemin) {
+
+    $ajout = new controller\addItem();
+    $ajout->addItem($twig, $menu, $chemin);
+
+});
+
+$app->post('/add/', function () use ($twig, $app, $menu, $chemin) {
+
+    $allPostVars = $this->app->request->post();
+
+    $ajout = new controller\addItem();
+    $ajout->addItemView($twig, $menu, $chemin, $allPostVars);
 
 });
 

@@ -2,12 +2,23 @@
 
 namespace controller;
 
+use model\annonce;
+
 class addItem{
 
-    function addItem($twig, $menu, $chemin){
-
+    function addItemView($twig, $menu, $chemin){
 
         $template = $twig->loadTemplate("add.html.twig");
         echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+
+    }
+
+    function addNewItem($twig, $menu, $chemin, $allPostVars){
+
+        $annonce = new Annonce();
+        $annonce
+        $template = $twig->loadTemplate("add.html.twig");
+        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+
     }
 }
