@@ -36,7 +36,7 @@ $app->get('/add/', function () use ($twig, $menu, $chemin) {
 });
 
 $app->get('/search/', function () use ($twig, $menu, $chemin) {
-    $s = new controller\search();
+    $s = new controller\Search();
     $s->show($twig, $menu, $chemin);
 });
 
@@ -55,7 +55,7 @@ $app->post('/search/', function () use ($app) {
 
     $array = $app->request->post();
 
-    $s = new controller\search();
+    $s = new controller\Search();
     $s->research($array);
 
 });
