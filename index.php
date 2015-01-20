@@ -40,7 +40,23 @@ $app->get('/search/', function () use ($twig, $menu, $chemin) {
     $s->show($twig, $menu, $chemin);
 });
 
-$app->post('/search/', function () use ($twig, $menu, $chemin) {
+$app->post('/search/', function () use ($app) {
+    /*$motclef = $app->request->post();
+    $categorie = $app->request->post("categorie");
+    $codepostal = $app->request->post("codepostal");
+    $prixmin = $app->request->post("prix-min");
+    $prixmax = $app->request->post("prix-max");
+
+    $array = array( [0] => $motclef,
+                    [1] => $categorie,
+                    [2] => $codepostal,
+                    [3] => $prixmin,
+                    [4] => $prixmax);*/
+
+    $array = $app->request->post();
+
+    $s = new controller\search();
+    $s->research($array);
 
 });
 
