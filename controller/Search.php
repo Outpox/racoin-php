@@ -2,7 +2,6 @@
 
 namespace controller;
 
-use db\connection;
 use model\Annonce;
 
 class Search {
@@ -13,19 +12,19 @@ class Search {
     }
 
     function research($array) {
-        print_r($array);
-        connection::createConn();
-
-        $annonce = Annonce::find(1);
-        echo $annonce;
-
+        //print_r($array);
 
         // motclef = annonce -> titre
         // motclef = annonce -> description
         // categorie = categorie sous-categ -> categ
         // codepostal = departement -> nom_departement
         // prix = annonce
+
         // Trier les annonces avec le prix
+        foreach(Annonce::all() as $annonce) {
+            if( ($annonce->prix >= $array['prix-min']) && ($annonce->prix <= $array['prix-max']))
+                echo $annonce->prix."<br/>";
+        }
         // Trier avec la catégorie
 
 
