@@ -1,6 +1,10 @@
 <?php
 require 'vendor/autoload.php';
 
+use db\connection;
+
+connection::createConn();
+
 $app = new \Slim\Slim(array(
     'mode' => 'development'
 ));
