@@ -6,8 +6,13 @@
     },
     "autoload":{
         "psr-0":{
+<<<<<<< HEAD
             "controller":".",
             "model":"."
+=======
+            "controller":"",
+            "model":""
+>>>>>>> master
         }
     }
 }

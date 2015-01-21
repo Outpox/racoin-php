@@ -1,5 +1,11 @@
 <?php
 require 'vendor/autoload.php';
+
+
+use db\connection;
+
+connection::createConn();
+
 $app = new \Slim\Slim(array(
     'mode' => 'development'
 ));
@@ -20,6 +26,7 @@ $app->get('/', function () use ($twig, $menu, $chemin) {
     $template = $twig->loadTemplate("index.html.twig");
     echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
+
 
 $app->get('/item/:n', function ($n) use ($twig, $menu, $chemin) {
     $item= new \controller\item();
