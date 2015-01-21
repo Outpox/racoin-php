@@ -43,4 +43,5 @@ $app->get('/search/', function () use ($twig, $menu, $chemin) {
     echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
 
+
 $app->run();
