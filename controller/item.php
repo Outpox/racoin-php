@@ -18,7 +18,7 @@ class item {
         $this->annonce = annonce::find($n);
         $this->annonceur = annonceur::find($this->annonce->id_annonceur);
         $this->departement = departement::find($this->annonce->id_departement );
-        $this->photo = photo::where('id_annonce', '=', '1')->get();
+        $this->photo = photo::where('id_annonce', '=', $n)->get();
         $template = $twig->loadTemplate("item.html.twig");
         echo $template->render(array("breadcrumb" => $menu,
             "chemin" => $chemin,
