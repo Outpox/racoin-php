@@ -7,11 +7,14 @@
  */
 
 namespace controller;
+use model\annonce;
 class item {
     public function __construct(){
     }
     function afficherItem($twig, $menu, $chemin,$n) {
-        $template = $twig->loadTemplate("item.html.twig");
-        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+        //$template = $twig->loadTemplate("item.html.twig");
+        //echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+        $this->annonce = annonce::all();
+        echo $this->annonce;
     }
 }

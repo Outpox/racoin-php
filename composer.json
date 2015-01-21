@@ -3,5 +3,11 @@
         "slim/slim": "2.*",
         "twig/twig": "~1.0",
         "illuminate/database": "4.2.9"
+    },
+    "autoload":{
+        "psr-0":{
+            "controller":".",
+            "model":"."
+        }
     }
 }

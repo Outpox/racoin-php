@@ -8,4 +8,8 @@ class annonce extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = false;
 }
 
+$test = annonce::find(1);
+echo $test;
+echo "lel";
+
 ?>
