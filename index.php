@@ -44,8 +44,8 @@ $app->get('/search/', function () use ($twig, $menu, $chemin) {
 });
 
 $app->get('/annonceur/:n', function ($n) use ($twig, $menu, $chemin) {
-    $item= new \controller\view_annonceur();
-    $item->afficherAnnonceur($twig,$menu,$chemin,$n);
+    $annonceur = new controller\viewAnnonceur();
+    $annonceur->afficherAnnonceur($twig, $menu, $chemin, $n);
 });
 
 
