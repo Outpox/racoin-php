@@ -26,7 +26,6 @@ class item {
             "annonceur" => $this->annonceur,
             "dep" => $this->departement->nom_departement,
             "photo" => $this->photo));
-//        echo $this->photo->first();
     }
 
 

@@ -43,5 +43,11 @@ $app->get('/search/', function () use ($twig, $menu, $chemin) {
     echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
 
+$app->get('/annonceur/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item= new \controller\view_annonceur();
+    $item->afficherAnnonceur($twig,$menu,$chemin,$n);
+});
+
+
 
 $app->run();
