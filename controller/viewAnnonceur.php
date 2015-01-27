@@ -7,9 +7,9 @@
  */
 
 namespace controller;
-use model\annonce;
-use model\annonceur;
-use model\photo;
+use model\Annonce;
+use model\Annonceur;
+use model\Photo;
 
 class viewAnnonceur {
     public function __construct(){
