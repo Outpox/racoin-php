@@ -10,32 +10,43 @@
             <p><i> - Les dernières annonces -</i></p>
         </div>
     </div>
+    {% set boucle = 1 %}
 
-    <div class="row">
+
     {% for annonce in annonces %}
-        <div class="columns md-3">
-            <article class="item">
-                <a href="{{ chemin }}/item/{{ annonce.id_annonce }}">
-                    <div class="row">
-                        <p><em>Le {{ annonce.date }} par {{ annonce.annonceur['nom_annonceur'] }}</em></p>
-                    </div>
-                    <div class="row">
-                        <div class="item-img">
-                            <img src="img/stamps.jpg" alt=""/>
-
-                            <p class="align-center">5 photos</p>
+        {% if boucle == 1 %}
+            <div class="row">
+        {% endif %}
+            <div class="columns md-3">
+                <article class="item">
+                    <a href="{{ chemin }}/item/{{ annonce.id_annonce }}">
+                        <div class="row">
+                            <p><em>Le {{ annonce.date }} par {{ annonce.annonceur['nom_annonceur'] }}</em></p>
                         </div>
-                        <div class="item-infos">
-                            <h5> {{ annonce.titre }}</h5>
-                            <p><b>Lieu :</b> {{ annonce.ville }}</p>
+                        <div class="row">
+                            <div class="item-img">
+                                <img src="img/stamps.jpg" alt=""/>
 
-                            <p><span class="price">{{ annonce.prix}} €</span></p>
+                                <p class="align-center">5 photos</p>
+                            </div>
+                            <div class="item-infos">
+                                <h5> {{ annonce.titre }}</h5>
+                                <p><b>Lieu :</b> {{ annonce.ville }}</p>
+
+                                <p><span class="price">{{ annonce.prix}} €</span></p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </article>
-        </div>
+                    </a>
+                </article>
+            </div>
+        {% if boucle == 4 %}
+            </div>
+            {% set boucle = 0 %}
+        {% endif %}
+        {% set boucle = boucle + 1 %}
     {% endfor %}
+    {% if boucle != 1 %}
+        </div>
+    {% endif %}
 
-    </div>
 {% endblock %}
