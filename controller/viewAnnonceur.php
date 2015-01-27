@@ -30,7 +30,7 @@ class viewAnnonceur {
                     ->where('id_annonce', '=', $a->id_annonce)
                     ->first()->url_photo;
             }else{
-                $a->url_photo = $chemin.'/img/canon5d.png';
+                $a->url_photo = $chemin.'/img/noimg.png';
             }
 
             $annonces[] = $a;
