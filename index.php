@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
+
 use db\connection;
 
 connection::createConn();
@@ -22,12 +23,14 @@ $menu = array(
 $chemin = dirname($_SERVER['SCRIPT_NAME']);
 
 $app->get('/', function () use ($twig, $menu, $chemin) {
-    $template = $twig->loadTemplate("index.html.twig");
-    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+    $index = new \controller\index();
+    $index->displayAllAnnonce($twig, $menu, $chemin);
 });
 
-$app->get('/item/:n', function () use ($twig, $menu, $chemin) {
 
+$app->get('/item/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item= new \controller\item();
+    $item->afficherItem($twig,$menu,$chemin,$n);
 });
 
 $app->get('/add/', function () use ($twig, $menu, $chemin) {
@@ -47,5 +50,24 @@ $app->post('/search/', function () use ($app, $twig, $menu, $chemin) {
     $s->research($array, $twig, $menu, $chemin);
 
 });
+
+$app->get('/annonceur/:n', function ($n) use ($twig, $menu, $chemin) {
+    $annonceur = new controller\viewAnnonceur();
+    $annonceur->afficherAnnonceur($twig, $menu, $chemin, $n);
+});
+
+$app->get('/del/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item = new controller\item();
+    $item->supprimerItemGet($twig, $menu, $chemin, $n);
+});
+
+$app->post('/del/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item = new controller\item();
+    $item->supprimerItemPost($twig, $menu, $chemin, $n);
+});
+
+
+
+
 
 $app->run();

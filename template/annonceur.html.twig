@@ -1,0 +1,55 @@
+{% extends "main.html.twig" %}
+
+{% block breadcrumb %}
+    {% include "breadcrumb.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="columns align-center">
+            <h1>{{ nom.nom_annonceur }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="columns md-6 align-center">
+            <h4>
+                <b>mail</b>: <a href="mailto:{{ nom.email }}">{{ nom.email }}</a>
+            </h4>
+        </div>
+        <div class="columns md-6 align-center">
+            <h4>
+                <b>tel</b>: {{ nom.telephone }}
+            </h4>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        {% for a in annonces %}
+            <div class="columns md-3">
+                <article class="item">
+                    <a href="{{ chemin }}/item/{{ a.id_annonce }}">
+                        <div class="row">
+                            <p><em>le {{ a.date }}</em></p>
+                        </div>
+                        <div class="row">
+                            <div class="item-img">
+                                <img src="{{ a.url_photo }}" alt=""/>
+
+                                <p class="align-center">{{ a.nb_photo }} photo(s)</p>
+                            </div>
+                            <div class="item-infos">
+                                <h5>{{ a.titre }}</h5>
+
+                                <p><b>Lieu :</b> {{ a.ville }}</p>
+
+                                <p><span class="price">{{ a.prix }}€ </span></p>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
