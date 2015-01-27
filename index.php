@@ -4,10 +4,6 @@ use db\connection;
 connection::createConn();
 
 
-use db\connection;
-
-connection::createConn();
-
 $app = new \Slim\Slim(array(
     'mode' => 'development'
 ));
