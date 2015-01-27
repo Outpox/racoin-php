@@ -7,9 +7,23 @@
 {% block content %}
     <div class="row">
         <div class="columns align-center">
-            <h2>Annonces de {{ nom.nom_annonceur }}</h2>
+            <h1>{{ nom.nom_annonceur }}</h1>
         </div>
     </div>
+
+    <div class="row">
+        <div class="columns md-6 align-center">
+            <h4>
+                <b>mail</b>: <a href="mailto:{{ nom.email }}">{{ nom.email }}</a>
+            </h4>
+        </div>
+        <div class="columns md-6 align-center">
+            <h4>
+                <b>tel</b>: {{ nom.telephone }}
+            </h4>
+        </div>
+    </div>
+    <br/>
     <div class="row">
         {% for a in annonces %}
             <div class="columns md-3">
