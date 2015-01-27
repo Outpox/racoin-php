@@ -4,12 +4,9 @@
             <h4>Catégories</h4>
         </div>
         <ul class="inline-list" id="list-categ">
-            <li><a href="#">Véhicules</a></li>
-            <li><a href="#">Immobilier</a></li>
-            <li><a href="#">Multimédia</a></li>
-            <li><a href="#">Matériel pro</a></li>
-            <li><a href="#">Loisirs</a></li>
-            <li><a href="#">Maison</a></li>
+            {% for categorie in categories %}
+                <li><a href="#"> {{ categorie.nom_categorie }}</a></li>
+            {% endfor %}
         </ul>
         <hr class="hr-ratcoin"/>
     </div>

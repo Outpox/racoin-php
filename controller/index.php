@@ -13,13 +13,14 @@ class index {
         }
     }
 
-    public function displayAllAnnonce($twig, $menu, $chemin) {
+    public function displayAllAnnonce($twig, $menu, $chemin, $cat) {
         $template = $twig->loadTemplate("index.html.twig");
         $menu = array(
             array('href' => "./index.php",
                 'text' => 'Acceuil'),
         );
+
         $this->getAll();
-        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "annonces" => $this->annonce));
+        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "categories" => $cat, "annonces" => $this->annonce));
     }
 }

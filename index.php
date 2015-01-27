@@ -20,9 +20,11 @@ $menu = array(
 
 $chemin = dirname($_SERVER['SCRIPT_NAME']);
 
-$app->get('/', function () use ($twig, $menu, $chemin) {
+$cat = new \controller\getCategorie();
+
+$app->get('/', function () use ($twig, $menu, $chemin, $cat) {
     $index = new \controller\index();
-    $index->displayAllAnnonce($twig, $menu, $chemin);
+    $index->displayAllAnnonce($twig, $menu, $chemin, $cat->getAll());
 });
 
 
