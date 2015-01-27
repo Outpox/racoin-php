@@ -24,7 +24,7 @@ $cat = new \controller\getCategorie();
 
 $app->get('/', function () use ($twig, $menu, $chemin, $cat) {
     $index = new \controller\index();
-    $index->displayAllAnnonce($twig, $menu, $chemin, $cat->getAll());
+    $index->displayAllAnnonce($twig, $menu, $chemin, $cat->getCategories());
 });
 
 
@@ -77,6 +77,10 @@ $app->post('/del/:n', function ($n) use ($twig, $menu, $chemin) {
     $item->supprimerItemPost($twig, $menu, $chemin, $n);
 });
 
+$app->get('/cat/:cat', function ($cat) use ($twig, $menu, $chemin) {
+    $categorie = new controller\getCategorie();
+    $categorie->displayCategorie($twig, $menu, $chemin, $cat);
+});
 
 
 
