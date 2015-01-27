@@ -38,8 +38,10 @@ class getCategorie {
     public function displayCategorie($twig, $menu, $chemin, $cat, $n) {
         $template = $twig->loadTemplate("index.html.twig");
         $menu = array(
-            array('href' => "./index.php",
+            array('href' => $chemin,
                 'text' => 'Acceuil'),
+            array('href' => $chemin."/cat/".$n,
+                'text' => Categorie::find($n)->nom_categorie)
         );
 
         $this->getCategorieContent($chemin, $n);
