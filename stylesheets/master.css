@@ -4159,6 +4159,7 @@ article.item {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
+  height: 300px;
 }
 /* line 125, ../scss/_global.scss */
 article.item a {
