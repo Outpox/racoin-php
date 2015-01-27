@@ -7,13 +7,25 @@ use model\SousCategorie;
 
 class Search {
 
-    function show($twig, $menu, $chemin) {
+    function show($twig, $menu, $chemin, $cat) {
         $template = $twig->loadTemplate("search.html.twig");
-        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+        $menu = array(
+            array('href' => $chemin,
+                'text' => 'Acceuil'),
+            array('href' => $chemin."/search",
+                'text' => "Recherche")
+        );
+        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "categories" => $cat));
     }
 
-    function research($array, $twig, $menu, $chemin) {
+    function research($array, $twig, $menu, $chemin, $cat) {
         $template = $twig->loadTemplate("index.html.twig");
+        $menu = array(
+            array('href' => $chemin,
+                'text' => 'Acceuil'),
+            array('href' => $chemin."/search",
+                'text' => "Recherche")
+        );
 
         $nospace_mc = str_replace(' ', '', $array['motclef']);
         $nospace_cp = str_replace(' ', '', $array['codepostal']);
@@ -58,7 +70,7 @@ class Search {
             }
         }
 
-        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "annonces" => $ltannonce));
+        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "annonces" => $ltannonce, "categories" => $cat));
     }
 }
 

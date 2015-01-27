@@ -35,7 +35,7 @@ class index {
     public function displayAllAnnonce($twig, $menu, $chemin, $cat) {
         $template = $twig->loadTemplate("index.html.twig");
         $menu = array(
-            array('href' => "./index.php",
+            array('href' => $chemin,
                 'text' => 'Acceuil'),
         );
 
