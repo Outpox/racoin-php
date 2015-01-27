@@ -23,8 +23,8 @@ $menu = array(
 $chemin = dirname($_SERVER['SCRIPT_NAME']);
 
 $app->get('/', function () use ($twig, $menu, $chemin) {
-    $template = $twig->loadTemplate("index.html.twig");
-    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+    $index = new \controller\index();
+    $index->displayAllAnnonce($twig, $menu, $chemin);
 });
 
 
