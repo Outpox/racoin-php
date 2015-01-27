@@ -8,7 +8,7 @@ class index {
     protected $annonce = array();
 
     public function getAll() {
-        foreach (Annonce::with("Annonceur")->take(12)->get(array('id_annonce', 'id_annonceur', 'id_sous_categorie', 'id_departement', 'prix', 'date', 'titre', 'ville')) as $a) {
+        foreach (Annonce::with("Annonceur")->orderBy('id_annonce', 'desc')->take(12)->get(array('id_annonce', 'id_annonceur', 'id_sous_categorie', 'id_departement', 'prix', 'date', 'titre', 'ville')) as $a) {
             array_push($this->annonce, $a->toArray());
         }
     }
