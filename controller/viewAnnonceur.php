@@ -14,7 +14,7 @@ use model\photo;
 class viewAnnonceur {
     public function __construct(){
     }
-    function afficherAnnonceur($twig, $menu, $chemin,$n) {
+    function afficherAnnonceur($twig, $menu, $chemin, $n, $cat) {
         $this->annonceur = annonceur::find($n);
         if(!isset($this->annonceur)){
             echo "404";
@@ -38,6 +38,7 @@ class viewAnnonceur {
         $template = $twig->loadTemplate("annonceur.html.twig");
         echo $template->render(array('nom' => $this->annonceur,
             "chemin" => $chemin,
-            "annonces" => $annonces));
+            "annonces" => $annonces,
+            "categories" => $cat));
     }
 }
