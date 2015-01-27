@@ -1,5 +1,7 @@
 <?php
 require 'vendor/autoload.php';
+use db\connection;
+connection::createConn();
 
 $app = new \Slim\Slim(array(
     'mode' => 'development'
@@ -29,16 +31,16 @@ $app->get('/item/:n', function () use ($twig, $menu, $chemin) {
 $app->get('/add/', function () use ($twig, $app, $menu, $chemin) {
 
     $ajout = new controller\addItem();
-    $ajout->addItem($twig, $menu, $chemin);
+    $ajout->addItemView($twig, $menu, $chemin);
 
 });
 
 $app->post('/add/', function () use ($twig, $app, $menu, $chemin) {
 
-    $allPostVars = $this->app->request->post();
+    $allPostVars = $app->request->post();
 
     $ajout = new controller\addItem();
-    $ajout->addItemView($twig, $menu, $chemin, $allPostVars);
+    $ajout->addNewItem($twig, $menu, $chemin, $allPostVars);
 
 });
 

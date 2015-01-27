@@ -4,7 +4,7 @@
     <div class="row">
         <div class="columns md-8 md-center">
             <div class="add-item">
-                <form method="post" action="/racoin-php/search">
+                <form method="post" action="add">
                     <fieldset id="coordonnee">
                         <legend>Vos coordonnées</legend>
 
@@ -19,33 +19,22 @@
                         <select name="categorie">
                             <option>Choississez une catégorie</option>
                             <option>-----</option>
-                            <option>Véhicule</option>
-                            <option>Immobilier</option>
-                            <option>Multimédia</option>
-                            <option>Matériel pro</option>
-                            <option>Loisirs</option>
-                            <option>Maison</option>
+                            <option value="1">Véhicule</option>
+                            <option value="2">Immobilier</option>
+                            <option value="3">Multimédia</option>
+                            <option value="4">Loisirs</option>
                         </select>
 
                         <input type="text" name="title" id="title" placeholder="Titre de l'annonce"/>
                         <textarea name="description" id="description" cols="40" rows="4"
                                   placeholder="Votre description…"></textarea>
                         <input type="text" name="price" id="price" placeholder="Prix"/>
-
-                        <div class="radio">
-                            <p>Vous êtes un :<br/>
-                                <label><input type="radio" name="name" value="1" id="particulier"/>Particulier</label>
-                                <br/>
-                                <label><input type="radio" name="name" value="2"
-                                              id="professionnel"/>Professionnel</label>
-                            </p>
-                        </div>
                     </fieldset>
                     <fieldset>
                         <legend>Sécurisez votre annonce</legend>
 
-                        <input type="password" name="nom" id="psw" placeholder="Mot de passe"/>
-                        <input type="password" name="email" id="psw-repeat" placeholder="Confirmez le mot de passe"/>
+                        <input type="password" name="psw" id="psw" placeholder="Mot de passe"/>
+                        <input type="password" name="confirm-psw" id="confirm-psw" placeholder="Confirmez le mot de passe"/>
 
                     </fieldset>
                     <div class="align-center" id="validate">
