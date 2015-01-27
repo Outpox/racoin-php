@@ -12,7 +12,6 @@
     </div>
     <div class="row">
         {% for a in annonces %}
-            {{ a }} <br/><br/>
             <div class="columns md-3">
                 <article class="item">
                     <a href="{{ chemin }}/item/{{ a.id_annonce }}">
@@ -23,7 +22,7 @@
                             <div class="item-img">
                                 <img src="{{ a.url_photo }}" alt=""/>
 
-                                <p class="align-center">5 photos</p>
+                                <p class="align-center">{{ a.nb_photo }} photo(s)</p>
                             </div>
                             <div class="item-infos">
                                 <h5>{{ a.titre }}</h5>
