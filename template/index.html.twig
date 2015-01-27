@@ -15,7 +15,7 @@
     {% for annonce in annonces %}
         <div class="columns md-3">
             <article class="item">
-                <a href="/item/{{ annonce.id_annonce }}">
+                <a href="{{ chemin }}/item/{{ annonce.id_annonce }}">
                     <div class="row">
                         <p><em>Le {{ annonce.date }} par {{ annonce.annonceur['nom_annonceur'] }}</em></p>
                     </div>
