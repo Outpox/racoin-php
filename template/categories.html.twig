@@ -5,7 +5,7 @@
         </div>
         <ul class="inline-list" id="list-categ">
             {% for categorie in categories %}
-                <li><a href="#"> {{ categorie.nom_categorie }}</a></li>
+                <li><a href="{{ chemin }}/cat/{{ categorie.id_categorie }}"> {{ categorie.nom_categorie }}</a></li>
             {% endfor %}
         </ul>
         <hr class="hr-ratcoin"/>

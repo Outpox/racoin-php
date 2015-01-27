@@ -77,9 +77,9 @@ $app->post('/del/:n', function ($n) use ($twig, $menu, $chemin) {
     $item->supprimerItemPost($twig, $menu, $chemin, $n);
 });
 
-$app->get('/cat/:cat', function ($cat) use ($twig, $menu, $chemin) {
+$app->get('/cat/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
     $categorie = new controller\getCategorie();
-    $categorie->displayCategorie($twig, $menu, $chemin, $cat);
+    $categorie->displayCategorie($twig, $menu, $chemin, $cat->getCategories(), $n);
 });
 
 
