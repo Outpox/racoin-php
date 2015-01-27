@@ -3,7 +3,6 @@
 namespace controller;
 
 use model\Annonce;
-use model\Annonceur;
 
 require './kint/Kint.class.php';
 
