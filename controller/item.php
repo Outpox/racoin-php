@@ -7,23 +7,23 @@
  */
 
 namespace controller;
-use model\annonce;
-use model\annonceur;
-use model\departement;
-use model\photo;
+use model\Annonce;
+use model\Annonceur;
+use model\Departement;
+use model\Photo;
 class item {
     public function __construct(){
     }
     function afficherItem($twig, $menu, $chemin,$n) {
 
-        $this->annonce = annonce::find($n);
+        $this->annonce = Annonce::find($n);
         if(!isset($this->annonce)){
             echo "404";
             return;
         }
-        $this->annonceur = annonceur::find($this->annonce->id_annonceur);
-        $this->departement = departement::find($this->annonce->id_departement );
-        $this->photo = photo::where('id_annonce', '=', $n)->get();
+        $this->annonceur = Annonceur::find($this->annonce->id_annonceur);
+        $this->departement = Departement::find($this->annonce->id_departement );
+        $this->photo = Photo::where('id_annonce', '=', $n)->get();
         $template = $twig->loadTemplate("item.html.twig");
         echo $template->render(array("breadcrumb" => $menu,
             "chemin" => $chemin,
@@ -34,7 +34,7 @@ class item {
     }
 
     function supprimerItemGet($twig, $menu, $chemin,$n){
-        $this->annonce = annonce::find($n);
+        $this->annonce = Annonce::find($n);
         if(!isset($this->annonce)){
             echo "404";
             return;
@@ -47,7 +47,7 @@ class item {
 
 
     function supprimerItemPost($twig, $menu, $chemin,$n){
-        $this->annonce = annonce::find($n);
+        $this->annonce = Annonce::find($n);
         $reponse = false;
         if($_POST["pass"] == $this->annonce->mdp){
             $reponse = true;
