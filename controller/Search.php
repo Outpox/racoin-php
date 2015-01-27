@@ -24,7 +24,7 @@ class Search {
             array('href' => $chemin,
                 'text' => 'Acceuil'),
             array('href' => $chemin."/search",
-                'text' => "Recherche")
+                'text' => "Résultats de la recherche")
         );
 
         $nospace_mc = str_replace(' ', '', $array['motclef']);
