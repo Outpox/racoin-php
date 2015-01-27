@@ -6,7 +6,6 @@
     },
     "autoload":{
         "psr-0":{
-
             "controller":"",
             "model":"",
             "db":""

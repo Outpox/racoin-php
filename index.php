@@ -48,8 +48,16 @@ $app->post('/add/', function () use ($twig, $app, $menu, $chemin) {
 });
 
 $app->get('/search/', function () use ($twig, $menu, $chemin) {
-    $template = $twig->loadTemplate("search.html.twig");
-    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+    $s = new controller\Search();
+    $s->show($twig, $menu, $chemin);
+});
+
+$app->post('/search/', function () use ($app, $twig, $menu, $chemin) {
+    $array = $app->request->post();
+
+    $s = new controller\Search();
+    $s->research($array, $twig, $menu, $chemin);
+
 });
 
 $app->get('/annonceur/:n', function ($n) use ($twig, $menu, $chemin) {
