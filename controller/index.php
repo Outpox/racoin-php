@@ -24,6 +24,9 @@ class index {
             }else{
                 $t->url_photo = $chemin.'/img/noimg.png';
             }
+            $t->nom_annonceur = Annonceur::select("nom_annonceur")
+                ->where("id_annonceur", "=", $t->id_annonceur)
+                ->first()->nom_annonceur;
             array_push($annonce, $t);
         }
         $this->annonce = $annonce;
