@@ -28,5 +28,19 @@ class item {
             "photo" => $this->photo));
     }
 
-
+    function supprimerItemGet($twig, $menu, $chemin,$n){
+        $this->annonce = annonce::find($n);
+        $template = $twig->loadTemplate("delGet.html.twig");
+        echo $template->render(array("breadcrumb" => $menu,
+            "chemin" => $chemin,
+            "annonce" => $this->annonce));
+    }
+    function supprimerItemPost($twig, $menu, $chemin,$n){
+        $this->annonce = annonce::find($n);
+        $template = $twig->loadTemplate("delPost.html.twig");
+        echo $template->render(array("breadcrumb" => $menu,
+            "chemin" => $chemin,
+            "annonce" => $this->annonce,
+            "pass" => $_POST["pass"]));
+    }
 }

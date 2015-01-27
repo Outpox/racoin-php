@@ -48,6 +48,15 @@ $app->get('/annonceur/:n', function ($n) use ($twig, $menu, $chemin) {
     $annonceur->afficherAnnonceur($twig, $menu, $chemin, $n);
 });
 
+$app->get('/del/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item = new controller\item();
+    $item->supprimerItemGet($twig, $menu, $chemin, $n);
+});
+
+$app->post('/del/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item = new controller\item();
+    $item->supprimerItemPost($twig, $menu, $chemin, $n);
+});
 
 
 $app->run();
