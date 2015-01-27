@@ -49,7 +49,7 @@ class item {
     function supprimerItemPost($twig, $menu, $chemin,$n){
         $this->annonce = Annonce::find($n);
         $reponse = false;
-        if($_POST["pass"] == $this->annonce->mdp){
+        if(password_verify($_POST["pass"],$this->annonce->mdp)){
             $reponse = true;
             photo::where('id_annonce', '=', $n)->delete();
             $this->annonce->delete();
