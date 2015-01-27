@@ -59,4 +59,7 @@ $app->post('/del/:n', function ($n) use ($twig, $menu, $chemin) {
 });
 
 
+
+
+
 $app->run();

@@ -16,6 +16,10 @@ class viewAnnonceur {
     }
     function afficherAnnonceur($twig, $menu, $chemin,$n) {
         $this->annonceur = annonceur::find($n);
+        if(!isset($this->annonceur)){
+            echo "404";
+            return;
+        }
         $tmp = annonce::where('id_annonceur','=',$n)->get();
 
         $annonces = [];

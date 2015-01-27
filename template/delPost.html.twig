@@ -7,13 +7,20 @@
 {% block content %}
     <div class="row">
         <div class="columns align-center">
-            <form action="" method="post">
-
-                <h3>Êtes-vous sûre de vouloir supprimer "{{ annonce.titre }}"?</h3>
-                <br/>
-                pass=>{{ pass }}
-            </form>
+            {% if pass %}
+                <h2>Vous allez être redirigé.</h2>
+            {% else %}
+                <form action="" method="post">
+                    <h3>Mot de passe de l'annonce "{{ annonce.titre }}"</h3>
+                    <br/>
+                    <input class="align-center" type="password" name="pass"/><br/>
+                    <input type="submit" value="Envoyer">
+                </form>
+                <h5>mot de passe incorrecte</h5>
+                <script src="{{ chemin }}/js/del.js"></script>
+            {% endif %}
 
         </div>
     </div>
+
 {% endblock %}
