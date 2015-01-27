@@ -4,8 +4,6 @@ namespace controller;
 
 use model\Annonce;
 
-require './kint/Kint.class.php';
-
 class index {
     protected $annonce = array();
 
