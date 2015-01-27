@@ -15,8 +15,13 @@ class viewAnnonceur {
     }
     function afficherAnnonceur($twig, $menu, $chemin,$n) {
         $this->annonceur = annonceur::find($n);
+//        $this->annonces = annonce::where('id_annonceur','=',$n)->get();
+        $this->annonces = annonce::join('photo','photo.id_annonce','=','annonce.id_annonce')
+                ->where('annonce.id_annonceur','=',$n)
+                ->get();
         $template = $twig->loadTemplate("annonceur.html.twig");
-        echo $template->render(array('test' => 'lel',
-            "chemin" => $chemin));
+        echo $template->render(array('nom' => $this->annonceur,
+            "chemin" => $chemin,
+            "annonces" => $this->annonces));
     }
 }

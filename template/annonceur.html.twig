@@ -5,5 +5,38 @@
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+        <div class="columns align-center">
+            <h2>Annonces de {{ nom.nom_annonceur }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% for a in annonces %}
+            {{ a }} <br/><br/>
+            <div class="columns md-3">
+                <article class="item">
+                    <a href="{{ chemin }}/item/{{ a.id_annonce }}">
+                        <div class="row">
+                            <p><em>le {{ a.date }}</em></p>
+                        </div>
+                        <div class="row">
+                            <div class="item-img">
+                                <img src="{{ a.url_photo }}" alt=""/>
+
+                                <p class="align-center">5 photos</p>
+                            </div>
+                            <div class="item-infos">
+                                <h5>{{ a.titre }}</h5>
+
+                                <p><b>Lieu :</b> {{ a.ville }}</p>
+
+                                <p><span class="price">{{ a.prix }}€ </span></p>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
