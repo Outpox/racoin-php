@@ -49,4 +49,9 @@ $app->get('/search/', function () use ($twig, $menu, $chemin) {
     echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
 
+$app->get('/add-confirm/', function () use ($twig, $menu, $chemin) {
+    $template = $twig->loadTemplate("add-confirm.html.twig");
+    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+});
+
 $app->run();
