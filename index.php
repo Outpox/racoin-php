@@ -19,6 +19,7 @@ $menu = array(
 $chemin = dirname($_SERVER['SCRIPT_NAME']);
 
 $cat = new \controller\getCategorie();
+$dpt = new \controller\getDepartment();
 
 $app->get('/', function () use ($twig, $menu, $chemin, $cat) {
     $index = new \controller\index();
@@ -31,10 +32,10 @@ $app->get('/item/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
     $item->afficherItem($twig,$menu,$chemin,$n, $cat->getCategories());
 });
 
-$app->get('/add/', function () use ($twig, $app, $menu, $chemin, $cat) {
+$app->get('/add/', function () use ($twig, $app, $menu, $chemin, $cat, $dpt) {
 
     $ajout = new controller\addItem();
-    $ajout->addItemView($twig, $menu, $chemin, $cat->getCategories());
+    $ajout->addItemView($twig, $menu, $chemin, $cat->getCategories(), $dpt->getAllDepartments());
 
 });
 
