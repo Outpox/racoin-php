@@ -20,19 +20,27 @@
                     <label for="ville" class="villeLabel"></label>
                     <input type="text" name="ville" id="ville" placeholder="Ville"/>
 
+                    <label for="departement" class="departementLabel"></label>
+                    <select name="departement">
+                        <option>Choississez un département</option>
+                        <option>-----</option>
+                        {% for d in departements %}
+                            <option value="{{ d.id_departement }}">{{ d.nom_departement }}</option>
+                        {% endfor %}
+                    </select>
+
                 </fieldset>
 
                 <fieldset>
                     <legend>Votre annonce</legend>
 
                     <label for="categorie" class="categorieLabel"></label>
-                    <select name="categorie">
+                    <select name="categorie" id="categorie">
                         <option>Choississez une catégorie</option>
                         <option>-----</option>
-                        <option value="1">Véhicule</option>
-                        <option value="2">Immobilier</option>
-                        <option value="3">Multimédia</option>
-                        <option value="4">Loisirs</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat.id_categorie }}">{{ cat.nom_categorie }}</option>
+                        {% endfor %}
                     </select>
 
                     <label for="title" class="titleLabel"></label>

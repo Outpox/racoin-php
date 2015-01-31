@@ -2,5 +2,7 @@
 
 {% block content %}
     <div class="row">
-        <p>Merci, votre annonce a bien été ajoutée.</p>
+        {% for e in errors %}
+            <li>{{ e }}</li>
+        {% endfor %}
 {% endblock %}
