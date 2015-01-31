@@ -52,13 +52,7 @@ $app->get('/search/', function () use ($twig, $menu, $chemin, $cat) {
     $s->show($twig, $menu, $chemin, $cat->getCategories());
 });
 
-<<<<<<< HEAD
-$app->get('/add-confirm/', function () use ($twig, $menu, $chemin) {
-    $template = $twig->loadTemplate("add-confirm.html.twig");
-    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
-});
 
-=======
 $app->post('/search/', function () use ($app, $twig, $menu, $chemin, $cat) {
     $array = $app->request->post();
 
@@ -88,7 +82,4 @@ $app->get('/cat/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
 });
 
 
-
-
->>>>>>> master
 $app->run();
