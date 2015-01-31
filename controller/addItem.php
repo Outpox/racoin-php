@@ -7,26 +7,16 @@ use model\Annonceur;
 
 class addItem{
 
-    function addItemView($twig, $menu, $chemin, $cat){
+    function addItemView($twig, $menu, $chemin){
 
         $template = $twig->loadTemplate("add.html.twig");
-        $menu = array(
-            array('href' => $chemin,
-                'text' => 'Acceuil'),
-            array('href' => $chemin."/add",
-                'text' => "Ajouter une nouvelle annonce")
-        );
-        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "categories" => $cat));
+        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 
     }
 
-<<<<<<< HEAD
     function addNewItem($twig, $menu, $chemin, $allPostVars){
 
 
-=======
-    function addNewItem($twig, $menu, $chemin, $allPostVars, $cat){
->>>>>>> master
         date_default_timezone_set('Europe/Paris');
 
         function isEmail($email) {
@@ -55,7 +45,6 @@ class addItem{
         $errors['priceAdvertiser'] = '';
         $errors['passwordAdvertiser'] = '';
 
-<<<<<<< HEAD
         if(empty($nom)) {
             $errors['nameAdvertiser'] = 'Veuillez entrer votre nom';
         }
@@ -118,19 +107,6 @@ class addItem{
             $template = $twig->loadTemplate("add-confirm.html.twig");
             echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
         }
-=======
-        $annonceur->save();
-        $annonceur->Annonce()->save($annonce);
-
-        $template = $twig->loadTemplate("add.html.twig");
-        $menu = array(
-            array('href' => $chemin,
-                'text' => 'Acceuil'),
-            array('href' => $chemin."/add",
-                'text' => "Ajouter une nouvelle annonce")
-        );
-        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "categorie" => $cat));
->>>>>>> master
 
     }
 }
