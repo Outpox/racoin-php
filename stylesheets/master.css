@@ -12,6 +12,7 @@ html {
   /* 2 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  height:100%;
 }
 
 /**
@@ -20,6 +21,7 @@ html {
 /* line 19, ../scss/_reset.scss */
 body {
   margin: 0;
+  height:100%;
 }
 
 /* HTML5 display definitions
@@ -4157,6 +4159,7 @@ article.item {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
+  height: 300px;
 }
 /* line 125, ../scss/_global.scss */
 article.item a {
@@ -4561,4 +4564,30 @@ div.add-item form input[type=submit] {
 div.add-item form input[type=submit]:hover {
   color: #ffffff;
   background-color: orangered;
+}
+
+#zoomImg{
+  visibility: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+#zoomImg img{
+  max-height: 90%;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 5%;
+}
+#zoomClose{
+  cursor:pointer;
+  position: fixed;
+  top: 0px;
+  right: 20px;
+  color: whitesmoke;
+  font-size:50px;
 }

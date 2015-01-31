@@ -7,9 +7,9 @@ class Annonceur extends \Illuminate\Database\Eloquent\Model {
     protected $primaryKey = 'id_annonceur';
     public $timestamps = false;
 
-    public function annonce()
+    public function Annonce()
     {
-        return $this->hasMany('model\Annonce', 'id_annonceur');
+        return $this->hasMany('model\Annonce', 'id_annonce');
     }
 }
 
