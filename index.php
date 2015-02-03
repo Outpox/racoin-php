@@ -108,6 +108,11 @@ $app->group('/api', function () use ($app)  {
 
 
     });
+
+    $app->get('/keys', function() use ($app) {
+        $s = new controller\Search();
+        $s->show($twig, $menu, $chemin, $cat->getCategories());
+    });
 });
 
 
