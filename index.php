@@ -124,6 +124,41 @@ $app->group('/api', function () use ($app)  {
 
 
     });
+
+    $app->group('/categorie', function () use ($app) {
+
+        $app->get('/', function() use ($app) {
+            $app->response->headers->set('Content-Type', 'application/json');
+            $c = Categorie::all(["id_categorie", "nom_categorie"]);
+            $links = [];
+            foreach ($c as $cat) {
+                $links["self"]["href"] = "/api/categorie/".$cat->id_categorie;
+                $cat->links = $links;
+            }
+            $links["self"]["href"] = "/api/categorie/";
+            $c->links = $links;
+            echo $c->toJson();
+        });
+
+        $app->get('/:id', function($id) use ($app) {
+            $app->response->headers->set('Content-Type', 'application/json');
+            $a = Annonce::select('id_annonce','prix','titre','ville')
+                ->where("id_sous_categorie", "=", $id)
+                ->get();
+            $links = [];
+
+            foreach ($a as $ann) {
+                $links["self"]["href"] = "/api/annonce/".$ann->id_annonce;
+                $ann->links = $links;
+            }
+
+            $c = Categorie::find($id);
+            $links["self"]["href"] = "/api/categorie/".$id;
+            $c->links = $links;
+            $c->annonces = $a;
+            echo $c->toJson();
+        });
+    });
 });
 
 
