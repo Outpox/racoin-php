@@ -11,7 +11,6 @@ class Photo extends \Illuminate\Database\Eloquent\Model {
     {
         return $this->belongsTo('model\Annonce', 'id_annonce');
     }
-
 }
 
 ?>
