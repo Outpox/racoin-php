@@ -88,7 +88,7 @@ $app->get('/cat/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
     $categorie->displayCategorie($twig, $menu, $chemin, $cat->getCategories(), $n);
 });
 
-$app->group('/api', function () use ($app)  {
+$app->group('/api', function () use ($app, $twig, $menu, $chemin, $cat)  {
 
     $app->group('/annonce', function () use ($app) {
 
@@ -117,9 +117,16 @@ $app->group('/api', function () use ($app)  {
 
     });
 
-    $app->get('/keys', function() use ($app) {
-        $s = new controller\Search();
-        $s->show($twig, $menu, $chemin, $cat->getCategories());
+    $app->get('/key', function() use ($app, $twig, $menu, $chemin, $cat) {
+        $kg = new controller\KeyGenerator();
+        $kg->show($twig, $menu, $chemin, $cat->getCategories());
+    });
+
+    $app->post('/key', function() use ($app, $twig, $menu, $chemin, $cat) {
+        $nom = $_POST['nom'];
+
+        $kg = new controller\KeyGenerator();
+        $kg->generateKey($twig, $menu, $chemin, $cat->getCategories(), $nom);
     });
 });
 
