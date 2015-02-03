@@ -5,6 +5,7 @@
     <div class="columns md-8 md-center">
         <div class="add-item add-form">
             <form method="post" action="add">
+                <input type="hidden" name="<?php echo $csrf_key; ?>" value="<?php echo $csrf_token; ?>">
                 <fieldset id="coordonnee">
                     <legend>Vos coordonnées</legend>
 
