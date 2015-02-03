@@ -4,6 +4,9 @@ use db\connection;
 use Illuminate\Database\Query\Expression as raw;
 use model\Annonce;
 use model\Categorie;
+use model\Annonceur;
+use model\Departement;
+
 connection::createConn();
 
 
@@ -98,9 +101,14 @@ $app->group('/api', function () use ($app)  {
                 ->toJson();
         });
         $app->get('/:id', function($id) use ($app) {
-            $annonceList = ['id_annonce','id_sous_categorie','id_annonceur','id_departement','prix','date','titre','description','ville'];
+            $annonceList = ['id_annonce','id_sous_categorie as categorie','id_annonceur as annonceur','id_departement as departement','prix','date','titre','description','ville'];
             $app->response->headers->set('Content-Type', 'application/json');
-            echo Annonce::select($annonceList)->find($id)->toJson();
+            $return =  Annonce::select($annonceList)->find($id);
+            $return->categorie = Categorie::find($return->categorie);
+            $return->annonceur = Annonceur::select('email','nom_annonceur','telephone')
+                ->find($return->annonceur);
+            $return->departement = Departement::select('id_departement','nom_departement')->find($return->departement);
+            echo $return->toJson();
         });
 
 
