@@ -95,7 +95,7 @@ $app->group('/api', function () use ($app)  {
 
         //GET
         $app->get('/', function() use ($app) {
-            $annonceList = ['id_annonce','prix','titre','ville',new raw('CONCAT("/api/annonce/",id_annonce) as uri')];g
+            $annonceList = ['id_annonce','prix','titre','ville',new raw('CONCAT("/api/annonce/",id_annonce) as uri')];
             $app->response->headers->set('Content-Type', 'application/json');
             echo Annonce::all($annonceList)->toJson();
 
