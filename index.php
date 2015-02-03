@@ -19,7 +19,7 @@ $app = new \Slim\Slim(array(
 ));
 
 session_start();
-$app->add(new CsrfGuard());
+//$app->add(new CsrfGuard());
 
 $loader = new Twig_Loader_Filesystem('template');
 $twig = new Twig_Environment($loader);
