@@ -95,21 +95,29 @@ $app->group('/api', function () use ($app)  {
 
         //GET
         $app->get('/', function() use ($app) {
-            $annonceList = ['id_annonce','prix','titre','ville',new raw('CONCAT("/api/annonce/",id_annonce) as uri')];
+            $annonceList = ['id_annonce','prix','titre','ville',new raw('CONCAT("/api/annonce/",id_annonce) as uri')];g
             $app->response->headers->set('Content-Type', 'application/json');
-            echo Annonce::all($annonceList)
-                ->toJson();
+            echo Annonce::all($annonceList)->toJson();
+
         });
         $app->get('/:id', function($id) use ($app) {
             $annonceList = ['id_annonce','id_sous_categorie as categorie','id_annonceur as annonceur','id_departement as departement','prix','date','titre','description','ville'];
-            $app->response->headers->set('Content-Type', 'application/json');
             $return =  Annonce::select($annonceList)->find($id);
-            $return->categorie = Categorie::find($return->categorie);
-            $return->annonceur = Annonceur::select('email','nom_annonceur','telephone')
-                ->find($return->annonceur);
-            $return->departement = Departement::select('id_departement','nom_departement')->find($return->departement);
-            echo $return->toJson();
+
+
+            if(isset($return)){
+                $app->response->headers->set('Content-Type', 'application/json');
+                $return->categorie = Categorie::find($return->categorie);
+                $return->annonceur = Annonceur::select('email','nom_annonceur','telephone')
+                    ->find($return->annonceur);
+                $return->departement = Departement::select('id_departement','nom_departement')->find($return->departement);
+                echo $return->toJson();
+            }else{
+                $app->notFound();
+            }
         });
+
+
 
 
 
