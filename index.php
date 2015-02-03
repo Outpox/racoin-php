@@ -1,6 +1,9 @@
 <?php
 require 'vendor/autoload.php';
 use db\connection;
+use Illuminate\Database\Query\Expression as raw;
+use model\Annonce;
+use model\Categorie;
 connection::createConn();
 
 
@@ -80,6 +83,31 @@ $app->post('/del/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
 $app->get('/cat/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
     $categorie = new controller\getCategorie();
     $categorie->displayCategorie($twig, $menu, $chemin, $cat->getCategories(), $n);
+});
+
+$app->group('/api', function () use ($app)  {
+
+    $app->group('/annonce', function () use ($app) {
+
+
+        //GET
+        $app->get('/', function() use ($app) {
+            $annonceList = ['id_annonce','prix','titre','ville',new raw('CONCAT("/api/annonce/",id_annonce) as uri')];
+            $app->response->headers->set('Content-Type', 'application/json');
+            echo Annonce::all($annonceList)
+                ->toJson();
+        });
+        $app->get('/:id', function($id) use ($app) {
+            $annonceList = ['id_annonce','id_sous_categorie','id_annonceur','id_departement','prix','date','titre','description','ville'];
+            $app->response->headers->set('Content-Type', 'application/json');
+            echo Annonce::select($annonceList)->find($id)->toJson();
+        });
+
+
+
+
+
+    });
 });
 
 
