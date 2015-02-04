@@ -4,7 +4,6 @@ namespace controller;
 
 use model\Annonce;
 use model\Annonceur;
-use model\Photo;
 
 class addItem{
 
@@ -21,7 +20,6 @@ class addItem{
     }
 
     function addNewItem($twig, $menu, $chemin, $allPostVars){
-
 
         date_default_timezone_set('Europe/Paris');
 
@@ -65,49 +63,50 @@ class addItem{
         $fichier_temporaire = $fileInfos['tmp_name'];
         $code_erreur = $fileInfos['error'];
 
-        switch ($code_erreur){
-            case UPLOAD_ERR_OK :
-                $destination = "/upload/$fileName";
 
-                if (copy($fichier_temporaire, $destination)){
-                    $message  = "Transfert terminé - Fichier = $nom - ";
-                    $message .= "Taille = $taille octets - ";
-                    $message .= "Type MIME = $type_mime";
-                } else {
-                   $message = "Problème de copie sur le serveur";
-                }
-                break;
-            case UPLOAD_ERR_NO_FILE :
-                $message = "Pas de fichier saisi";
-                break;
-            case UPLOAD_ERR_INI_SIZE :
-                $message  = "Fichier '$fileName' non transféré ";
-                $message .= ' (taille > upload_max_filesize.';
-                break;
-            case UPLOAD_ERR_FORM_SIZE :
-                $message  = "Fichier '$fileName' non transféré ";
-                $message .= ' (taille > MAX_FILE_SIZE.';
-                break;
-            case UPLOAD_ERR_PARTIAL :
-                $message  = "Fichier '$fileName' non transféré ";
-                $message .= ' (problème lors du transfert';
-                break;
-            case UPLOAD_ERR_NO_TMP_DIR :
-                $message  = "Fichier '$fileName' non transféré ";
-                $message .= ' (pas de répertoire temporaire).';
-                break;
-            case UPLOAD_ERR_CANT_WRITE :
-                $message  = "Fichier '$fileName' non transféré ";
-                $message .= ' (erreur lors de l\'écriture du fichier sur disque).';
-                break;
-            case UPLOAD_ERR_EXTENSION :
-                $message  = "Fichier '$fileName' non transféré ";
-                $message .= ' (transfert stoppé par l\'extension).';
-                break;
-            default :
-                $message  = "Fichier '$fileName' non transféré ";
-                $message .= ' (erreur inconnue : $code_erreur';
-        }
+//        switch ($code_erreur){
+//            case UPLOAD_ERR_OK :
+//                $destination = "$chemin/upload/$fileName";
+//
+//                if (move_uploaded_file($fichier_temporaire, $destination)){
+//                    $message  = "Transfert terminé - Fichier = $nom - ";
+//                    $message .= "Taille = $taille octets - ";
+//                    $message .= "Type MIME = $type_mime";
+//                } else {
+//                   $message = "Problème de copie sur le serveur";
+//                }
+//                break;
+//            case UPLOAD_ERR_NO_FILE :
+//                $message = "Pas de fichier saisi";
+//                break;
+//            case UPLOAD_ERR_INI_SIZE :
+//                $message  = "Fichier '$fileName' non transféré ";
+//                $message .= ' (taille > upload_max_filesize.';
+//                break;
+//            case UPLOAD_ERR_FORM_SIZE :
+//                $message  = "Fichier '$fileName' non transféré ";
+//                $message .= ' (taille > MAX_FILE_SIZE.';
+//                break;
+//            case UPLOAD_ERR_PARTIAL :
+//                $message  = "Fichier '$fileName' non transféré ";
+//                $message .= ' (problème lors du transfert';
+//                break;
+//            case UPLOAD_ERR_NO_TMP_DIR :
+//                $message  = "Fichier '$fileName' non transféré ";
+//                $message .= ' (pas de répertoire temporaire).';
+//                break;
+//            case UPLOAD_ERR_CANT_WRITE :
+//                $message  = "Fichier '$fileName' non transféré ";
+//                $message .= ' (erreur lors de l\'écriture du fichier sur disque).';
+//                break;
+//            case UPLOAD_ERR_EXTENSION :
+//                $message  = "Fichier '$fileName' non transféré ";
+//                $message .= ' (transfert stoppé par l\'extension).';
+//                break;
+//            default :
+//                $message  = "Fichier '$fileName' non transféré ";
+//                $message .= ' (erreur inconnue : $code_erreur';
+//        }
 
         // On teste que les champs ne soient pas vides et soient de bons types
         if(empty($nom)) {
@@ -158,18 +157,17 @@ class addItem{
         else{
             $annonce = new Annonce();
             $annonceur = new Annonceur();
-            $photo = new Photo();
 
-            $annonceur->email = $allPostVars['email'];
-            $annonceur->nom_annonceur = $allPostVars['nom'];
-            $annonceur->telephone = $allPostVars['phone'];
+            $annonceur->email = htmlentities($allPostVars['email']);
+            $annonceur->nom_annonceur = htmlentities($allPostVars['nom']);
+            $annonceur->telephone = htmlentities($allPostVars['phone']);
 
-            $annonce->ville = $allPostVars['ville'];
+            $annonce->ville = htmlentities($allPostVars['ville']);
             $annonce->id_departement = $allPostVars['departement'];
-            $annonce->prix = $allPostVars['price'];
+            $annonce->prix = htmlentities($allPostVars['price']);
             $annonce->mdp = password_hash ($allPostVars['psw'], PASSWORD_DEFAULT);
-            $annonce->titre = $allPostVars['title'];
-            $annonce->description = $allPostVars['description'];
+            $annonce->titre = htmlentities($allPostVars['title']);
+            $annonce->description = htmlentities($allPostVars['description']);
             $annonce->id_sous_categorie = $allPostVars['categorie'];
             $annonce->date = date('Y-m-d');
 
@@ -177,8 +175,6 @@ class addItem{
             $annonceur->save();
             $annonceur->annonce()->save($annonce);
 
-            $photo->url_photo = "/upload/$fileName";
-            $photo->annonce()->save($annonce);
 
             $template = $twig->loadTemplate("add-confirm.html.twig");
             echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
