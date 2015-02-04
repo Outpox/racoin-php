@@ -61,6 +61,18 @@ $app->post('/add/', function () use ($twig, $app, $menu, $chemin, $cat) {
 
 });
 
+$app->get('/modify/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item = new \controller\item();
+    $item->modifyGet($twig,$menu,$chemin, $n);
+});
+
+$app->post('/modify/:n', function ($n) use ($twig, $app, $menu, $chemin, $cat, $dpt) {
+    $allPostVars = $app->request->post();
+    $item= new \controller\item();
+    $item->modifyPost($twig,$menu,$chemin, $n, $allPostVars, $cat->getCategories(), $dpt->getAllDepartments());
+});
+
+
 $app->get('/search/', function () use ($twig, $menu, $chemin, $cat) {
     $s = new controller\Search();
     $s->show($twig, $menu, $chemin, $cat->getCategories());

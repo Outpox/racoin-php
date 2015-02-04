@@ -56,12 +56,12 @@ class addItem{
         $errors['priceAdvertiser'] = '';
         $errors['passwordAdvertiser'] = '';
 
-        $fileInfos = $_FILES["fichier"];
-        $fileName = $fileInfos['name'];
-        $type_mime = $fileInfos['type'];
-        $taille = $fileInfos['size'];
-        $fichier_temporaire = $fileInfos['tmp_name'];
-        $code_erreur = $fileInfos['error'];
+//        $fileInfos = $_FILES["fichier"];
+//        $fileName = $fileInfos['name'];
+//        $type_mime = $fileInfos['type'];
+//        $taille = $fileInfos['size'];
+//        $fichier_temporaire = $fileInfos['tmp_name'];
+//        $code_erreur = $fileInfos['error'];
 
 
 //        switch ($code_erreur){
@@ -168,7 +168,7 @@ class addItem{
             $annonce->mdp = password_hash ($allPostVars['psw'], PASSWORD_DEFAULT);
             $annonce->titre = htmlentities($allPostVars['title']);
             $annonce->description = htmlentities($allPostVars['description']);
-            $annonce->id_sous_categorie = $allPostVars['categorie'];
+            $annonce->id_categorie = $allPostVars['categorie'];
             $annonce->date = date('Y-m-d');
 
 
