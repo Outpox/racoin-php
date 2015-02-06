@@ -104,7 +104,7 @@ $app->group('/api', function () use ($app) {
     $app->group('/annonce', function () use ($app) {
 
         $app->get('/:id', function ($id) use ($app) {
-            $annonceList = ['id_annonce', 'id_sous_categorie as categorie', 'id_annonceur as annonceur', 'id_departement as departement', 'prix', 'date', 'titre', 'description', 'ville'];
+            $annonceList = ['id_annonce', 'id_categorie as categorie', 'id_annonceur as annonceur', 'id_departement as departement', 'prix', 'date', 'titre', 'description', 'ville'];
             $return = Annonce::select($annonceList)->find($id);
 
             if (isset($return)) {
@@ -156,7 +156,8 @@ $app->group('/api', function () use ($app) {
     $app->group('/categories', function () use ($app) {
         $app->get('/', function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
-            $c = Categorie::all(["id_categorie", "nom_categorie"]);
+//            $c = Categorie::all(["id_categorie", "nom_categorie"]);
+            $c = Categorie::get();
             $links = [];
             foreach ($c as $cat) {
                 $links["self"]["href"] = "/api/categorie/" . $cat->id_categorie;
