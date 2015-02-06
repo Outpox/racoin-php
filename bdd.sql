@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `annonce`;
 
 CREATE TABLE `annonce` (
   `id_annonce` int(11) NOT NULL AUTO_INCREMENT,
-  `id_sous_categorie` int(11) DEFAULT NULL,
+  `id_categorie` int(11) DEFAULT NULL,
   `id_annonceur` int(11) DEFAULT NULL,
   `id_departement` int(11) DEFAULT NULL,
   `prix` float DEFAULT NULL,
@@ -85,18 +85,4 @@ CREATE TABLE `region` (
   `id_region` int(11) NOT NULL AUTO_INCREMENT,
   `nom_region` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_region`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
-# Affichage de la table sous_categorie
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `sous_categorie`;
-
-CREATE TABLE `sous_categorie` (
-  `id_sous_categorie` int(11) NOT NULL AUTO_INCREMENT,
-  `id_categorie` int(11) DEFAULT NULL,
-  `nom_sous_categorie` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_sous_categorie`),
-  KEY `id_categorie_idxfk` (`id_categorie`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
