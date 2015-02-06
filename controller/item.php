@@ -28,7 +28,7 @@ class item {
             array('href' => $chemin,
                 'text' => 'Acceuil'),
             array('href' => $chemin."/cat/".$n,
-                'text' => Categorie::find($this->annonce->id_sous_categorie)->nom_categorie),
+                'text' => Categorie::find($this->annonce->id_categorie)->nom_categorie),
             array('href' => $chemin."/item/".$n,
             'text' => $this->annonce->titre)
         );
@@ -75,5 +75,41 @@ class item {
             "annonce" => $this->annonce,
             "pass" => $reponse,
             "categories" => $cat));
+    }
+
+    function modifyGet($twig, $menu, $chemin, $n){
+        $this->annonce = Annonce::find($n);
+        if(!isset($this->annonce)){
+            echo "404";
+            return;
+        }
+        $template = $twig->loadTemplate("modifyGet.html.twig");
+        echo $template->render(array("breadcrumb" => $menu,
+            "chemin" => $chemin,
+            "annonce" => $this->annonce));
+    }
+
+    function modifyPost($twig, $menu, $chemin, $n, $cat, $dpt){
+        $this->annonce = Annonce::find($n);
+        $this->annonceur = Annonceur::find($this->annonce->id_annonceur);
+        $this->categItem = Categorie::find($this->annonce->id_categorie)->nom_categorie;
+        $this->dptItem = Departement::find($this->annonce->id_departement)->nom_departement;
+
+        $reponse = false;
+        if(password_verify($_POST["pass"],$this->annonce->mdp)){
+            $reponse = true;
+
+        }
+
+        $template = $twig->loadTemplate("modifyPost.html.twig");
+        echo $template->render(array("breadcrumb" => $menu,
+            "chemin" => $chemin,
+            "annonce" => $this->annonce,
+            "annonceur" => $this->annonceur,
+            "pass" => $reponse,
+            "categories" => $cat,
+            "departements" => $dpt,
+            "dptItem" => $this->dptItem,
+            "categItem" => $this->categItem));
     }
 }

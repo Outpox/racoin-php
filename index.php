@@ -1,11 +1,15 @@
 <?php
 require 'vendor/autoload.php';
 use db\connection;
+
+use Slim\Extras\Middleware\CsrfGuard;
+
 use Illuminate\Database\Query\Expression as raw;
 use model\Annonce;
 use model\Categorie;
 use model\Annonceur;
 use model\Departement;
+
 
 connection::createConn();
 
@@ -13,6 +17,9 @@ connection::createConn();
 $app = new \Slim\Slim(array(
     'mode' => 'development'
 ));
+
+session_start();
+//$app->add(new CsrfGuard());
 
 $loader = new Twig_Loader_Filesystem('template');
 $twig = new Twig_Environment($loader);
@@ -54,6 +61,18 @@ $app->post('/add/', function () use ($twig, $app, $menu, $chemin, $cat) {
 
 });
 
+$app->get('/modify/:n', function ($n) use ($twig, $menu, $chemin) {
+    $item = new \controller\item();
+    $item->modifyGet($twig,$menu,$chemin, $n);
+});
+
+$app->post('/modify/:n', function ($n) use ($twig, $app, $menu, $chemin, $cat, $dpt) {
+    $allPostVars = $app->request->post();
+    $item= new \controller\item();
+    $item->modifyPost($twig,$menu,$chemin, $n, $allPostVars, $cat->getCategories(), $dpt->getAllDepartments());
+});
+
+
 $app->get('/search/', function () use ($twig, $menu, $chemin, $cat) {
     $s = new controller\Search();
     $s->show($twig, $menu, $chemin, $cat->getCategories());
@@ -88,7 +107,7 @@ $app->get('/cat/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
     $categorie->displayCategorie($twig, $menu, $chemin, $cat->getCategories(), $n);
 });
 
-$app->get('/api', function () use ($twig, $menu, $chemin, $cat) {
+$app->get('/api(/)', function () use ($twig, $menu, $chemin, $cat) {
     $template = $twig->loadTemplate("api.html.twig");
     $menu = array(
         array('href' => $chemin,
@@ -99,7 +118,7 @@ $app->get('/api', function () use ($twig, $menu, $chemin, $cat) {
     echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
 });
 
-$app->group('/api', function () use ($app) {
+$app->group('/api', function () use ($app, $twig, $menu, $chemin, $cat) {
 
     $app->group('/annonce', function () use ($app) {
 
@@ -177,6 +196,18 @@ $app->group('/api', function () use ($app) {
             $c->links = $links;
             echo $c->toJson();
         });
+    });
+
+    $app->get('/key', function() use ($app, $twig, $menu, $chemin, $cat) {
+        $kg = new controller\KeyGenerator();
+        $kg->show($twig, $menu, $chemin, $cat->getCategories());
+    });
+
+    $app->post('/key', function() use ($app, $twig, $menu, $chemin, $cat) {
+        $nom = $_POST['nom'];
+
+        $kg = new controller\KeyGenerator();
+        $kg->generateKey($twig, $menu, $chemin, $cat->getCategories(), $nom);
     });
 });
 

@@ -3,29 +3,37 @@
 {% block content %}
     <div class="row">
     <div class="columns md-8 md-center">
+    {% if pass == false %}
+                <h2>Mot de passe incorrect</h2>
+                <form action="" method="post">
+
+                <h3>Mot de passe pour modifier l'annonce "{{ annonce.titre }}"</h3>
+                <br/>
+                <input class="align-center" type="password" name="pass"/><br/>
+                <input type="submit" value="Envoyer">
+            </form>
+            {% else %}
         <div class="add-item add-form">
-            <form method="post" action="add">
+            <form method="post" action="confirm">
                 <input type="hidden" name="<?php echo $csrf_key; ?>" value="<?php echo $csrf_token; ?>">
 
                 <fieldset id="coordonnee">
                     <legend>Vos coordonnées</legend>
 
                     <label for="nom" class="nomLabel"></label>
-                    <input type="text" name="nom" id="nom" placeholder="Nom"/>
+                    <input type="text" name="nom" id="nom" placeholder="Nom" value="{{ annonceur.nom_annonceur }}"/>
 
                     <label for="email" class="emailLabel"></label>
-                    <input type="email" name="email" id="email" placeholder="Email"/>
+                    <input type="email" name="email" id="email" placeholder="Email" value="{{ annonceur.email }}"/>
 
                     <label for="phone" class="phoneLabel"></label>
-                    <input type="text" name="phone" id="phone" placeholder="Téléphone"/>
+                    <input type="text" name="phone" id="phone" placeholder="Téléphone" value="{{ annonceur.telephone }}"/>
 
                     <label for="ville" class="villeLabel"></label>
-                    <input type="text" name="ville" id="ville" placeholder="Ville"/>
-
-                    <label for="departement" class="departementLabel"></label>
+                    <input type="text" name="ville" id="ville" placeholder="Ville" value="{{ annonce.ville }}"/>
+                    <label for="departement" class="departementLabel">{{ dtpItem }}</label>
                     <select name="departement">
-                        <option>Choississez un département</option>
-                        <option>-----</option>
+                        <option selected="selected" value="{{ annonce.id_departement }}">{{ dptItem }}</option>
                         {% for d in departements %}
                             <option value="{{ d.id_departement }}">{{ d.nom_departement }}</option>
                         {% endfor %}
@@ -38,21 +46,20 @@
 
                     <label for="categorie" class="categorieLabel"></label>
                     <select name="categorie" id="categorie">
-                        <option>Choississez une catégorie</option>
-                        <option>-----</option>
+                        <option selected="selected" value="{{ annonce.id_categorie }}">{{ categItem }}</option>
                         {% for cat in categories %}
                             <option value="{{ cat.id_categorie }}">{{ cat.nom_categorie }}</option>
                         {% endfor %}
                     </select>
 
                     <label for="title" class="titleLabel"></label>
-                    <input type="text" name="title" id="title" placeholder="Titre de l'annonce"/>
+                    <input type="text" name="title" id="title" placeholder="Titre de l'annonce" value="{{ annonce.titre }}"/>
 
                     <label for="description" class="descriptionLabel"></label>
-                    <textarea name="description" id="description" cols="40" rows="4" placeholder="Votre description…"></textarea>
+                    <textarea name="description" id="description" cols="40" rows="4" placeholder="Votre description…">{{ annonce.description }}</textarea>
 
                     <label for="price" class="priceLabel"></label>
-                    <input type="text" name="price" id="price" placeholder="Prix"/>
+                    <input type="text" name="price" id="price" placeholder="Prix" value="{{ annonce.prix }}"/>
                 </fieldset>
                 <fieldset>
                     <legend>Sécurisez votre annonce</legend>
@@ -63,13 +70,14 @@
 
                 </fieldset>
                 {#<div class="file-upload">#}
-                    {#<input type="hidden" name="MAX_FILE_SIZE" value="2097152"/>#}
-                    {#<input type="file" name="fichier" value=""/>#}
+                {#<input type="hidden" name="MAX_FILE_SIZE" value="2097152"/>#}
+                {#<input type="file" name="fichier" value=""/>#}
                 {#</div>#}
                 <div class="align-center" id="validate">
-                    <input type="submit" id="toggler" value="Déposer mon annonce"/>
+                    <input type="submit" id="toggler" value="Modifier mon annonce"/>
                 </div>
             </form>
         </div>
+    {% endif %}
     </div>
 {% endblock %}

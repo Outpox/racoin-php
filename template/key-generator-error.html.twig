@@ -1,0 +1,9 @@
+{% extends "main.html.twig" %}
+
+{% block content %}
+    <div class="key align-center">
+        <h3>Erreur !</h3>
+        <p>Nom invalide, recommencez l'opération en entrant un nom valide !</p>
+        <a href="{{ chemin }}/api/key">Génerer une clé API</a>
+    </div>
+{% endblock %}

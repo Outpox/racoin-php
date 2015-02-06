@@ -8,12 +8,12 @@ class Annonce extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = false;
 
 
-    public function Annonceur()
+    public function annonceur()
     {
         return $this->belongsTo('model\Annonceur', 'id_annonceur');
     }
 
-    public function Photo()
+    public function photo()
     {
         return $this->hasMany('model\Photo', 'id_photo');
     }
