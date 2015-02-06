@@ -34,8 +34,8 @@ $app->get('/', function () use ($twig, $menu, $chemin, $cat) {
 
 
 $app->get('/item/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
-    $item= new \controller\item();
-    $item->afficherItem($twig,$menu,$chemin,$n, $cat->getCategories());
+    $item = new \controller\item();
+    $item->afficherItem($twig, $menu, $chemin, $n, $cat->getCategories());
 });
 
 $app->get('/add/', function () use ($twig, $app, $menu, $chemin, $cat, $dpt) {
@@ -88,74 +88,82 @@ $app->get('/cat/:n', function ($n) use ($twig, $menu, $chemin, $cat) {
     $categorie->displayCategorie($twig, $menu, $chemin, $cat->getCategories(), $n);
 });
 
-$app->group('/api', function () use ($app)  {
+$app->get('/api', function () use ($twig, $menu, $chemin, $cat) {
+    $template = $twig->loadTemplate("api.html.twig");
+    $menu = array(
+        array('href' => $chemin,
+            'text' => 'Acceuil'),
+        array('href' => $chemin . '/api',
+            'text' => 'Api')
+    );
+    echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin));
+});
+
+$app->group('/api', function () use ($app) {
 
     $app->group('/annonce', function () use ($app) {
 
+        $app->get('/:id', function ($id) use ($app) {
+            $annonceList = ['id_annonce', 'id_sous_categorie as categorie', 'id_annonceur as annonceur', 'id_departement as departement', 'prix', 'date', 'titre', 'description', 'ville'];
+            $return = Annonce::select($annonceList)->find($id);
 
-        //GET
-        $app->get('/', function() use ($app) {
-            $annonceList = ['id_annonce','prix','titre','ville',new raw('CONCAT("/api/annonce/",id_annonce) as uri')];
+            if (isset($return)) {
+                $app->response->headers->set('Content-Type', 'application/json');
+                $return->categorie = Categorie::find($return->categorie);
+                $return->annonceur = Annonceur::select('email', 'nom_annonceur', 'telephone')
+                    ->find($return->annonceur);
+                $return->departement = Departement::select('id_departement', 'nom_departement')->find($return->departement);
+                echo $return->toJson();
+            } else {
+                $app->notFound();
+            }
+        });
+    });
+
+    $app->group('/annonces', function () use ($app) {
+
+        $app->get('/', function () use ($app) {
+            $annonceList = ['id_annonce', 'prix', 'titre', 'ville', new raw('CONCAT("/api/annonce/",id_annonce) as uri')];
             $app->response->headers->set('Content-Type', 'application/json');
             echo Annonce::all($annonceList)->toJson();
 
         });
-        $app->get('/:id', function($id) use ($app) {
-            $annonceList = ['id_annonce','id_sous_categorie as categorie','id_annonceur as annonceur','id_departement as departement','prix','date','titre','description','ville'];
-            $return =  Annonce::select($annonceList)->find($id);
-
-
-            if(isset($return)){
-                $app->response->headers->set('Content-Type', 'application/json');
-                $return->categorie = Categorie::find($return->categorie);
-                $return->annonceur = Annonceur::select('email','nom_annonceur','telephone')
-                    ->find($return->annonceur);
-                $return->departement = Departement::select('id_departement','nom_departement')->find($return->departement);
-                echo $return->toJson();
-            }else{
-                $app->notFound();
-            }
-        });
-
-
-
-
-
-
-
     });
+
 
     $app->group('/categorie', function () use ($app) {
 
-        $app->get('/', function() use ($app) {
+        $app->get('/:id', function ($id) use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
-            $c = Categorie::all(["id_categorie", "nom_categorie"]);
-            $links = [];
-            foreach ($c as $cat) {
-                $links["self"]["href"] = "/api/categorie/".$cat->id_categorie;
-                $cat->links = $links;
-            }
-            $links["self"]["href"] = "/api/categorie/";
-            $c->links = $links;
-            echo $c->toJson();
-        });
-
-        $app->get('/:id', function($id) use ($app) {
-            $app->response->headers->set('Content-Type', 'application/json');
-            $a = Annonce::select('id_annonce','prix','titre','ville')
+            $a = Annonce::select('id_annonce', 'prix', 'titre', 'ville')
                 ->where("id_sous_categorie", "=", $id)
                 ->get();
             $links = [];
 
             foreach ($a as $ann) {
-                $links["self"]["href"] = "/api/annonce/".$ann->id_annonce;
+                $links["self"]["href"] = "/api/annonce/" . $ann->id_annonce;
                 $ann->links = $links;
             }
 
             $c = Categorie::find($id);
-            $links["self"]["href"] = "/api/categorie/".$id;
+            $links["self"]["href"] = "/api/categorie/" . $id;
             $c->links = $links;
             $c->annonces = $a;
+            echo $c->toJson();
+        });
+    });
+
+    $app->group('/categories', function () use ($app) {
+        $app->get('/', function () use ($app) {
+            $app->response->headers->set('Content-Type', 'application/json');
+            $c = Categorie::all(["id_categorie", "nom_categorie"]);
+            $links = [];
+            foreach ($c as $cat) {
+                $links["self"]["href"] = "/api/categorie/" . $cat->id_categorie;
+                $cat->links = $links;
+            }
+            $links["self"]["href"] = "/api/categorie/";
+            $c->links = $links;
             echo $c->toJson();
         });
     });
