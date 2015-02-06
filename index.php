@@ -123,10 +123,17 @@ $app->group('/api', function () use ($app) {
     $app->group('/annonces(/)', function () use ($app) {
 
         $app->get('/', function () use ($app) {
-            $annonceList = ['id_annonce', 'prix', 'titre', 'ville', new raw('CONCAT("/api/annonce/",id_annonce) as uri')];
+            $annonceList = ['id_annonce', 'prix', 'titre', 'ville'];
             $app->response->headers->set('Content-Type', 'application/json');
-            echo Annonce::all($annonceList)->toJson();
-
+            $a = Annonce::all($annonceList);
+            $links = [];
+            foreach ($a as $ann) {
+                $links["self"]["href"] = "/api/annonce/" . $ann->id_annonce;
+                $ann->links = $links;
+            }
+            $links["self"]["href"] = "/api/annonces/";
+            $a->links = $links;
+            echo $a->toJson();
         });
     });
 
@@ -163,7 +170,7 @@ $app->group('/api', function () use ($app) {
                 $links["self"]["href"] = "/api/categorie/" . $cat->id_categorie;
                 $cat->links = $links;
             }
-            $links["self"]["href"] = "/api/categorie/";
+            $links["self"]["href"] = "/api/categories/";
             $c->links = $links;
             echo $c->toJson();
         });
