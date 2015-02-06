@@ -136,7 +136,7 @@ $app->group('/api', function () use ($app) {
         $app->get('/:id', function ($id) use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
             $a = Annonce::select('id_annonce', 'prix', 'titre', 'ville')
-                ->where("id_sous_categorie", "=", $id)
+                ->where("id_categorie", "=", $id)
                 ->get();
             $links = [];
 
