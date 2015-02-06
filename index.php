@@ -120,7 +120,7 @@ $app->group('/api', function () use ($app) {
         });
     });
 
-    $app->group('/annonces', function () use ($app) {
+    $app->group('/annonces(/)', function () use ($app) {
 
         $app->get('/', function () use ($app) {
             $annonceList = ['id_annonce', 'prix', 'titre', 'ville', new raw('CONCAT("/api/annonce/",id_annonce) as uri')];
@@ -153,7 +153,7 @@ $app->group('/api', function () use ($app) {
         });
     });
 
-    $app->group('/categories', function () use ($app) {
+    $app->group('/categories(/)', function () use ($app) {
         $app->get('/', function () use ($app) {
             $app->response->headers->set('Content-Type', 'application/json');
 //            $c = Categorie::all(["id_categorie", "nom_categorie"]);
