@@ -16,7 +16,7 @@ class getCategorie {
     }
 
     public function getCategorieContent($chemin, $n) {
-        $tmp = Annonce::with("Annonceur")->orderBy('id_annonce','desc')->where('id_sous_categorie', "=", $n)->get();
+        $tmp = Annonce::with("Annonceur")->orderBy('id_annonce','desc')->where('id_categorie', "=", $n)->get();
         $annonce = [];
         foreach($tmp as $t) {
             $t->nb_photo = Photo::where("id_annonce", "=", $t->id_annonce)->count();
