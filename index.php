@@ -113,6 +113,9 @@ $app->group('/api', function () use ($app) {
                 $return->annonceur = Annonceur::select('email', 'nom_annonceur', 'telephone')
                     ->find($return->annonceur);
                 $return->departement = Departement::select('id_departement', 'nom_departement')->find($return->departement);
+                $links = [];
+                $links["self"]["href"] = "/api/annonce/" . $return->id_annonce;
+                $return->links = $links;
                 echo $return->toJson();
             } else {
                 $app->notFound();
