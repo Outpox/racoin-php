@@ -41,9 +41,9 @@ class Search {
             $annonce = Annonce::all();
 
         } else {
+            // A REFAIRE SEPARER LES TRUCS
             if( ($nospace_mc !== "") ) {
-                $query->where('description', 'like', '%'.$array['motclef'].'%')
-                    ->where('titre', 'like', '%'.$array['motclef'].'%');
+                $query->where('description', 'like', '%'.$array['motclef'].'%');
             }
 
             if( ($nospace_cp !== "") ) {

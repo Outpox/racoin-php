@@ -18,7 +18,19 @@ $app = new \Slim\Slim(array(
     'mode' => 'development'
 ));
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+    $_SESSION['formStarted'] = true;
+}
+
+if (!isset($_SESSION['token'])) {
+    $token = md5(uniqid(rand(), TRUE));
+    $_SESSION['token'] = $token;
+    $_SESSION['token_time'] = time();
+} else {
+    $token = $_SESSION['token'];
+}
+
 //$app->add(new CsrfGuard());
 
 $loader = new Twig_Loader_Filesystem('template');
