@@ -3,7 +3,7 @@
 namespace controller;
 
 use model\Annonce;
-use model\SousCategorie;
+use model\Categorie;
 
 class Search {
 
@@ -30,48 +30,50 @@ class Search {
         $nospace_mc = str_replace(' ', '', $array['motclef']);
         $nospace_cp = str_replace(' ', '', $array['codepostal']);
 
-        $ltannonce = array();
-        // Si tout est vide on affiche tout
-        if( (($nospace_mc === "") && ($nospace_cp === "")) &&
+
+        $query = Annonce::select();
+
+        if( ($nospace_mc === "") &&
+            ($nospace_cp === "") &&
             (($array['categorie'] === "Toutes catégories" || $array['categorie'] === "-----")) &&
             ($array['prix-min'] === "Min") &&
-            ($array['prix-max'] === "Max")) {
+            ( ($array['prix-max'] === "Max") || ($array['prix-max'] === "nolimit") ) ) {
+            $annonce = Annonce::all();
 
-            foreach(Annonce::all() as $annonce) {
-                array_push($ltannonce, $annonce);
-            }
-            //affiche tout
         } else {
-            foreach(Annonce::all() as $annonce) {
-                // Test si annonce est dans la bonne tranche de prix
-                if( (($annonce->prix >= $array['prix-min']) && ($annonce->prix <= $array['prix-max'])) ||
-                    (($annonce->prix >= $array['prix-min']) && ($array['prix-max'] === "Max")) ||
-                    (($array['prix-min'] === "Min") && ($annonce->prix <= $array['prix-max'])) ||
-                    (($array['prix-min'] === "Min") && ($array['prix-max'] === "Max")) ) {
-
-                    // Test si annonce est dans la bonne ville
-                    if( ($annonce->ville === $array['codepostal']) || ($nospace_cp === "") ) {
-
-                        // Test si annonce comprend motclef dans le titre ou la description
-                        $title = stripos($annonce->titre, $array['motclef']);
-                        $desc = stripos($annonce->description, $array['motclef']);
-
-                        if( (($title !== false) || ($desc !== false)) || ($nospace_mc === "") ) {
-
-                            // Test si l'annonce est dans la bonne categorie
-                            $sscateg = SousCategorie::find($annonce->id_sous_categorie);
-                            if ( ($sscateg->id_categorie === $array['categorie']) || (($array['categorie'] === "Toutes catégories" || $array['categorie'] === "-----")) ) {
-                                array_push($ltannonce, $annonce);
-                            }
-                        }
-
-                    }
-                }
+            if( ($nospace_mc !== "") ) {
+                $query->where('description', 'like', '%'.$array['motclef'].'%')
+                    ->where('titre', 'like', '%'.$array['motclef'].'%');
             }
+
+            if( ($nospace_cp !== "") ) {
+                $query->where('ville', '=', $array['codepostal']);
+            }
+
+            if ( ($array['categorie'] !== "Toutes catégories" && $array['categorie'] !== "-----") ) {
+                $categ = Categorie::select('id_categorie')->where('id_categorie', '=', $array['categorie'])->first()->id_categorie;
+                $query->where('id_categorie', '=', $categ);
+            }
+
+            if ( $array['prix-min'] !== "Min" && $array['prix-max'] !== "Max") {
+                if($array['prix-max'] !== "nolimit") {
+                    $query->whereBetween('prix', array($array['prix-min'], $array['prix-max']));
+                } else {
+                    $query->where('prix', '>=', $array['prix-min']);
+                }
+            } elseif ( $array['prix-max'] !== "Max" && $array['prix-max'] !== "nolimit") {
+                $query->where('prix', '<=', $array['prix-max']);
+            } elseif ( $array['prix-min'] !== "Min" ) {
+                $query->where('prix', '>=', $array['prix-min']);
+            }
+
+            $annonce = $query->get();
         }
 
-        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "annonces" => $ltannonce, "categories" => $cat));
+        echo $template->render(array("breadcrumb" => $menu, "chemin" => $chemin, "annonces" => $annonce, "categories" => $cat));
+
     }
+
 }
 
 ?>
