@@ -39,9 +39,9 @@
                                 <p class="align-center">{{ a.nb_photo }} photo(s)</p>
                             </div>
                             <div class="item-infos">
-                                <h5>{{ a.titre }}</h5>
+                                <h5>{{ a.titre | raw }}</h5>
 
-                                <p><b>Lieu :</b> {{ a.ville }}</p>
+                                <p><b>Lieu :</b> {{ a.ville | raw }}</p>
 
                                 <p><span class="price">{{ a.prix }}€ </span></p>
                             </div>

@@ -9,7 +9,7 @@
         <div class="columns align-center">
             <form action="" method="post">
 
-                <h3>Mot de passe pour modifier l'annonce "{{ annonce.titre }}"</h3>
+                <h3>Mot de passe pour modifier l'annonce "{{ annonce.titre | raw }}"</h3>
                 <br/>
                 <input class="align-center" type="password" name="pass"/><br/>
                 <input type="submit" value="Envoyer">

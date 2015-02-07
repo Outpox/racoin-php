@@ -8,7 +8,7 @@
     <div class="row">
         <div class="columns">
             <div class="wrapper-item">
-                <div class="title-item align-center"><h3>{{ annonce.titre }}</h3></div>
+                <div class="title-item align-center"><h3>{{ annonce.titre | raw }}</h3></div>
                 <div class="ilovetowrap">
                     <div class="item-container align-center">
                         <div class="img-container" id="main-img">
@@ -30,7 +30,7 @@
                                 </tr>
                                 <tr>
                                     <td>Ville</td>
-                                    <td>{{ annonce.ville }}</td>
+                                    <td>{{ annonce.ville | raw }}</td>
                                 </tr>
                                 <tr>
                                     <td>Departement</td>
@@ -67,7 +67,7 @@
         <div class="columns md-12">
             <h3>Description</h3>
 
-            {{ annonce.description }}
+            {{ annonce.description | raw }}
         </div>
 
     </div>

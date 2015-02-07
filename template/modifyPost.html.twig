@@ -21,7 +21,7 @@
                     <legend>Vos coordonnées</legend>
 
                     <label for="nom" class="nomLabel"></label>
-                    <input type="text" name="nom" id="nom" placeholder="Nom" value="{{ annonceur.nom_annonceur }}"/>
+                    <input type="text" name="nom" id="nom" placeholder="Nom" value="{{ annonceur.nom_annonceur | raw }}"/>
 
                     <label for="email" class="emailLabel"></label>
                     <input type="email" name="email" id="email" placeholder="Email" value="{{ annonceur.email }}"/>
@@ -30,7 +30,7 @@
                     <input type="text" name="phone" id="phone" placeholder="Téléphone" value="{{ annonceur.telephone }}"/>
 
                     <label for="ville" class="villeLabel"></label>
-                    <input type="text" name="ville" id="ville" placeholder="Ville" value="{{ annonce.ville }}"/>
+                    <input type="text" name="ville" id="ville" placeholder="Ville" value="{{ annonce.ville | raw }}"/>
                     <label for="departement" class="departementLabel">{{ dtpItem }}</label>
                     <select name="departement">
                         <option selected="selected" value="{{ annonce.id_departement }}">{{ dptItem }}</option>
@@ -53,10 +53,10 @@
                     </select>
 
                     <label for="title" class="titleLabel"></label>
-                    <input type="text" name="title" id="title" placeholder="Titre de l'annonce" value="{{ annonce.titre }}"/>
+                    <input type="text" name="title" id="title" placeholder="Titre de l'annonce" value="{{ annonce.titre | raw }}"/>
 
                     <label for="description" class="descriptionLabel"></label>
-                    <textarea name="description" id="description" cols="40" rows="4" placeholder="Votre description…">{{ annonce.description }}</textarea>
+                    <textarea name="description" id="description" cols="40" rows="4" placeholder="Votre description…">{{ annonce.description | raw }}</textarea>
 
                     <label for="price" class="priceLabel"></label>
                     <input type="text" name="price" id="price" placeholder="Prix" value="{{ annonce.prix }}"/>

@@ -31,8 +31,8 @@
                                 <p class="align-center">{{ annonce.nb_photo }} photo(s)</p>
                             </div>
                             <div class="item-infos">
-                                <h5> {{ annonce.titre }}</h5>
-                                <p><b>Lieu :</b> {{ annonce.ville }}</p>
+                                <h5> {{ annonce.titre | raw }}</h5>
+                                <p><b>Lieu :</b> {{ annonce.ville | raw }}</p>
 
                                 <p><span class="price">{{ annonce.prix}} €</span></p>
                             </div>

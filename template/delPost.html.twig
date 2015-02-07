@@ -11,7 +11,7 @@
                 <h2>Vous allez être redirigé.</h2>
             {% else %}
                 <form action="" method="post">
-                    <h3>Mot de passe de l'annonce "{{ annonce.titre }}"</h3>
+                    <h3>Mot de passe de l'annonce "{{ annonce.titre | raw }}"</h3>
                     <br/>
                     <input class="align-center" type="password" name="pass"/><br/>
                     <input type="submit" value="Envoyer">

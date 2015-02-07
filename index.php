@@ -38,7 +38,7 @@ $twig = new Twig_Environment($loader);
 
 $menu = array(
     array('href' => "./index.php",
-        'text' => 'Acceuil')
+        'text' => 'Accueil')
 );
 
 $chemin = dirname($_SERVER['SCRIPT_NAME']);
