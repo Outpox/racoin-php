@@ -64,26 +64,29 @@ $app->get('/add/', function () use ($twig, $app, $menu, $chemin, $cat, $dpt) {
 
 });
 
-$app->post('/add/', function () use ($twig, $app, $menu, $chemin, $cat) {
+$app->post('/add/', function () use ($twig, $app, $menu, $chemin) {
 
     $allPostVars = $app->request->post();
-
     $ajout = new controller\addItem();
-    $ajout->addNewItem($twig, $menu, $chemin, $allPostVars, $cat->getCategories());
-
+    $ajout->addNewItem($twig, $menu, $chemin, $allPostVars);
 });
 
-$app->get('/modify/:n', function ($n) use ($twig, $menu, $chemin) {
+$app->get('/item/:id/edit', function ($id) use ($twig, $menu, $chemin) {
     $item = new \controller\item();
-    $item->modifyGet($twig,$menu,$chemin, $n);
+    $item->modifyGet($twig,$menu,$chemin, $id);
 });
 
-$app->post('/modify/:n', function ($n) use ($twig, $app, $menu, $chemin, $cat, $dpt) {
+$app->post('/item/:id/edit', function ($id) use ($twig, $app, $menu, $chemin, $cat, $dpt) {
     $allPostVars = $app->request->post();
     $item= new \controller\item();
-    $item->modifyPost($twig,$menu,$chemin, $n, $allPostVars, $cat->getCategories(), $dpt->getAllDepartments());
+    $item->modifyPost($twig,$menu,$chemin, $id, $allPostVars, $cat->getCategories(), $dpt->getAllDepartments());
 });
 
+$app->map('/item/:id/confirm', function ($id) use ($twig, $app, $menu, $chemin) {
+    $allPostVars = $app->request->post();
+    $item = new \controller\item();
+    $item->edit($twig,$menu,$chemin, $id, $allPostVars);
+})->name('confirm')->via('GET', 'POST');
 
 $app->get('/search/', function () use ($twig, $menu, $chemin, $cat) {
     $s = new controller\Search();
